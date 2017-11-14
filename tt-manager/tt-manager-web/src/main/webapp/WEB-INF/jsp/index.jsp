@@ -7,7 +7,7 @@
     <!-- 引入Bootstrap核心样式文件（必须） -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <!-- 引入Bootstrap默认主题样式（可选） -->
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/bootstrap.theme.css">
     <!-- 你自己的样式或其他文件 -->
     <%--<link rel="stylesheet" href="example.css">--%>
 </head>
