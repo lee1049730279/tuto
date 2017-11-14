@@ -12,8 +12,9 @@
     <%--<link rel="stylesheet" href="example.css">--%>
 </head>
 <body>
+<<<<<<< Updated upstream
 
-    江燕到此一游~~~哈哈哈
+    二货燕到此一游~~~哈哈哈
 <!-- 你的HTML结构...... -->
 <!-- 以下代码，如果不使用JS插件则不需要 -->
 <!-- 由于Bootstrap的JS插件依赖jQuery，so 引入jQuery -->
@@ -22,5 +23,8 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- 你自己的脚本文件 -->
 <%--<script src="example.js"></script>--%>
+=======
+<h2>周乐朝，LECH!</h2>
+>>>>>>> Stashed changes
 </body>
 </html>
