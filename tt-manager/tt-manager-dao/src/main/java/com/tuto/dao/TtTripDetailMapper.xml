@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtTripDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.tuto.pojo.po.TtTripDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="trip_id" property="tripId" jdbcType="BIGINT" />
+    <result column="place_introduce" property="placeIntroduce" jdbcType="VARCHAR" />
+    <result column="hotel_introduce" property="hotelIntroduce" jdbcType="VARCHAR" />
+    <result column="food_introduce" property="foodIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, trip_id, place_introduce, hotel_introduce, food_introduce
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tuto.pojo.po.TtTripDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tt_trip_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tt_trip_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tt_trip_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tuto.pojo.po.TtTripDetailExample" >
+    delete from tt_trip_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tuto.pojo.po.TtTripDetail" >
+    insert into tt_trip_detail (id, trip_id, place_introduce, 
+      hotel_introduce, food_introduce)
+    values (#{id,jdbcType=BIGINT}, #{tripId,jdbcType=BIGINT}, #{placeIntroduce,jdbcType=VARCHAR}, 
+      #{hotelIntroduce,jdbcType=VARCHAR}, #{foodIntroduce,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tuto.pojo.po.TtTripDetail" >
+    insert into tt_trip_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tripId != null" >
+        trip_id,
+      </if>
+      <if test="placeIntroduce != null" >
+        place_introduce,
+      </if>
+      <if test="hotelIntroduce != null" >
+        hotel_introduce,
+      </if>
+      <if test="foodIntroduce != null" >
+        food_introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="tripId != null" >
+        #{tripId,jdbcType=BIGINT},
+      </if>
+      <if test="placeIntroduce != null" >
+        #{placeIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelIntroduce != null" >
+        #{hotelIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="foodIntroduce != null" >
+        #{foodIntroduce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tuto.pojo.po.TtTripDetailExample" resultType="java.lang.Integer" >
+    select count(*) from tt_trip_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tt_trip_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.tripId != null" >
+        trip_id = #{record.tripId,jdbcType=BIGINT},
+      </if>
+      <if test="record.placeIntroduce != null" >
+        place_introduce = #{record.placeIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelIntroduce != null" >
+        hotel_introduce = #{record.hotelIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foodIntroduce != null" >
+        food_introduce = #{record.foodIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tt_trip_detail
+    set id = #{record.id,jdbcType=BIGINT},
+      trip_id = #{record.tripId,jdbcType=BIGINT},
+      place_introduce = #{record.placeIntroduce,jdbcType=VARCHAR},
+      hotel_introduce = #{record.hotelIntroduce,jdbcType=VARCHAR},
+      food_introduce = #{record.foodIntroduce,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tuto.pojo.po.TtTripDetail" >
+    update tt_trip_detail
+    <set >
+      <if test="tripId != null" >
+        trip_id = #{tripId,jdbcType=BIGINT},
+      </if>
+      <if test="placeIntroduce != null" >
+        place_introduce = #{placeIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelIntroduce != null" >
+        hotel_introduce = #{hotelIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="foodIntroduce != null" >
+        food_introduce = #{foodIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tuto.pojo.po.TtTripDetail" >
+    update tt_trip_detail
+    set trip_id = #{tripId,jdbcType=BIGINT},
+      place_introduce = #{placeIntroduce,jdbcType=VARCHAR},
+      hotel_introduce = #{hotelIntroduce,jdbcType=VARCHAR},
+      food_introduce = #{foodIntroduce,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

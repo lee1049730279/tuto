@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtTripMapper" >
+  <resultMap id="BaseResultMap" type="com.tuto.pojo.po.TtTrip" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="s_title" property="sTitle" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+    <result column="real_price" property="realPrice" jdbcType="BIGINT" />
+    <result column="position_id" property="positionId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="traffic" property="traffic" jdbcType="VARCHAR" />
+    <result column="hotel" property="hotel" jdbcType="VARCHAR" />
+    <result column="buy_time" property="buyTime" jdbcType="BIGINT" />
+    <result column="good_rate" property="goodRate" jdbcType="REAL" />
+    <result column="place_score" property="placeScore" jdbcType="REAL" />
+    <result column="hotel_score" property="hotelScore" jdbcType="REAL" />
+    <result column="service_score" property="serviceScore" jdbcType="REAL" />
+    <result column="traffic_score" property="trafficScore" jdbcType="REAL" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, s_title, price, real_price, position_id, type, traffic, hotel, buy_time, 
+    good_rate, place_score, hotel_score, service_score, traffic_score, state, city_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tuto.pojo.po.TtTripExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tt_trip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tt_trip
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tt_trip
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tuto.pojo.po.TtTripExample" >
+    delete from tt_trip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tuto.pojo.po.TtTrip" >
+    insert into tt_trip (id, title, s_title, 
+      price, real_price, position_id, 
+      type, traffic, hotel, 
+      buy_time, good_rate, place_score, 
+      hotel_score, service_score, traffic_score, 
+      state, city_id)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{sTitle,jdbcType=VARCHAR}, 
+      #{price,jdbcType=BIGINT}, #{realPrice,jdbcType=BIGINT}, #{positionId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{traffic,jdbcType=VARCHAR}, #{hotel,jdbcType=VARCHAR}, 
+      #{buyTime,jdbcType=BIGINT}, #{goodRate,jdbcType=REAL}, #{placeScore,jdbcType=REAL}, 
+      #{hotelScore,jdbcType=REAL}, #{serviceScore,jdbcType=REAL}, #{trafficScore,jdbcType=REAL}, 
+      #{state,jdbcType=INTEGER}, #{cityId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tuto.pojo.po.TtTrip" >
+    insert into tt_trip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sTitle != null" >
+        s_title,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="realPrice != null" >
+        real_price,
+      </if>
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="traffic != null" >
+        traffic,
+      </if>
+      <if test="hotel != null" >
+        hotel,
+      </if>
+      <if test="buyTime != null" >
+        buy_time,
+      </if>
+      <if test="goodRate != null" >
+        good_rate,
+      </if>
+      <if test="placeScore != null" >
+        place_score,
+      </if>
+      <if test="hotelScore != null" >
+        hotel_score,
+      </if>
+      <if test="serviceScore != null" >
+        service_score,
+      </if>
+      <if test="trafficScore != null" >
+        traffic_score,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sTitle != null" >
+        #{sTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="realPrice != null" >
+        #{realPrice,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="traffic != null" >
+        #{traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel != null" >
+        #{hotel,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null" >
+        #{buyTime,jdbcType=BIGINT},
+      </if>
+      <if test="goodRate != null" >
+        #{goodRate,jdbcType=REAL},
+      </if>
+      <if test="placeScore != null" >
+        #{placeScore,jdbcType=REAL},
+      </if>
+      <if test="hotelScore != null" >
+        #{hotelScore,jdbcType=REAL},
+      </if>
+      <if test="serviceScore != null" >
+        #{serviceScore,jdbcType=REAL},
+      </if>
+      <if test="trafficScore != null" >
+        #{trafficScore,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tuto.pojo.po.TtTripExample" resultType="java.lang.Integer" >
+    select count(*) from tt_trip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tt_trip
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sTitle != null" >
+        s_title = #{record.sTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=BIGINT},
+      </if>
+      <if test="record.realPrice != null" >
+        real_price = #{record.realPrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.positionId != null" >
+        position_id = #{record.positionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.traffic != null" >
+        traffic = #{record.traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotel != null" >
+        hotel = #{record.hotel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyTime != null" >
+        buy_time = #{record.buyTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodRate != null" >
+        good_rate = #{record.goodRate,jdbcType=REAL},
+      </if>
+      <if test="record.placeScore != null" >
+        place_score = #{record.placeScore,jdbcType=REAL},
+      </if>
+      <if test="record.hotelScore != null" >
+        hotel_score = #{record.hotelScore,jdbcType=REAL},
+      </if>
+      <if test="record.serviceScore != null" >
+        service_score = #{record.serviceScore,jdbcType=REAL},
+      </if>
+      <if test="record.trafficScore != null" >
+        traffic_score = #{record.trafficScore,jdbcType=REAL},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tt_trip
+    set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
+      s_title = #{record.sTitle,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=BIGINT},
+      real_price = #{record.realPrice,jdbcType=BIGINT},
+      position_id = #{record.positionId,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=INTEGER},
+      traffic = #{record.traffic,jdbcType=VARCHAR},
+      hotel = #{record.hotel,jdbcType=VARCHAR},
+      buy_time = #{record.buyTime,jdbcType=BIGINT},
+      good_rate = #{record.goodRate,jdbcType=REAL},
+      place_score = #{record.placeScore,jdbcType=REAL},
+      hotel_score = #{record.hotelScore,jdbcType=REAL},
+      service_score = #{record.serviceScore,jdbcType=REAL},
+      traffic_score = #{record.trafficScore,jdbcType=REAL},
+      state = #{record.state,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tuto.pojo.po.TtTrip" >
+    update tt_trip
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sTitle != null" >
+        s_title = #{sTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="realPrice != null" >
+        real_price = #{realPrice,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null" >
+        position_id = #{positionId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="traffic != null" >
+        traffic = #{traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel != null" >
+        hotel = #{hotel,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTime != null" >
+        buy_time = #{buyTime,jdbcType=BIGINT},
+      </if>
+      <if test="goodRate != null" >
+        good_rate = #{goodRate,jdbcType=REAL},
+      </if>
+      <if test="placeScore != null" >
+        place_score = #{placeScore,jdbcType=REAL},
+      </if>
+      <if test="hotelScore != null" >
+        hotel_score = #{hotelScore,jdbcType=REAL},
+      </if>
+      <if test="serviceScore != null" >
+        service_score = #{serviceScore,jdbcType=REAL},
+      </if>
+      <if test="trafficScore != null" >
+        traffic_score = #{trafficScore,jdbcType=REAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tuto.pojo.po.TtTrip" >
+    update tt_trip
+    set title = #{title,jdbcType=VARCHAR},
+      s_title = #{sTitle,jdbcType=VARCHAR},
+      price = #{price,jdbcType=BIGINT},
+      real_price = #{realPrice,jdbcType=BIGINT},
+      position_id = #{positionId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      traffic = #{traffic,jdbcType=VARCHAR},
+      hotel = #{hotel,jdbcType=VARCHAR},
+      buy_time = #{buyTime,jdbcType=BIGINT},
+      good_rate = #{goodRate,jdbcType=REAL},
+      place_score = #{placeScore,jdbcType=REAL},
+      hotel_score = #{hotelScore,jdbcType=REAL},
+      service_score = #{serviceScore,jdbcType=REAL},
+      traffic_score = #{trafficScore,jdbcType=REAL},
+      state = #{state,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

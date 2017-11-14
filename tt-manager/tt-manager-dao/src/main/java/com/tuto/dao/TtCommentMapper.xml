@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.tuto.pojo.po.TtComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="trip_id" property="tripId" jdbcType="BIGINT" />
+    <result column="orders_id" property="ordersId" jdbcType="BIGINT" />
+    <result column="place_evaluate" property="placeEvaluate" jdbcType="INTEGER" />
+    <result column="hotel_evaluate" property="hotelEvaluate" jdbcType="INTEGER" />
+    <result column="service_evaluate" property="serviceEvaluate" jdbcType="INTEGER" />
+    <result column="traffic_evaluate" property="trafficEvaluate" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="evaluate_time" property="evaluateTime" jdbcType="TIMESTAMP" />
+    <result column="usefull" property="usefull" jdbcType="BIGINT" />
+    <result column="useless" property="useless" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, trip_id, orders_id, place_evaluate, hotel_evaluate, service_evaluate, 
+    traffic_evaluate, content, evaluate_time, usefull, useless
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tuto.pojo.po.TtCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tt_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tt_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tt_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tuto.pojo.po.TtCommentExample" >
+    delete from tt_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tuto.pojo.po.TtComment" >
+    insert into tt_comment (id, user_id, trip_id, 
+      orders_id, place_evaluate, hotel_evaluate, 
+      service_evaluate, traffic_evaluate, content, 
+      evaluate_time, usefull, useless
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{tripId,jdbcType=BIGINT}, 
+      #{ordersId,jdbcType=BIGINT}, #{placeEvaluate,jdbcType=INTEGER}, #{hotelEvaluate,jdbcType=INTEGER}, 
+      #{serviceEvaluate,jdbcType=INTEGER}, #{trafficEvaluate,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, 
+      #{evaluateTime,jdbcType=TIMESTAMP}, #{usefull,jdbcType=BIGINT}, #{useless,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tuto.pojo.po.TtComment" >
+    insert into tt_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="tripId != null" >
+        trip_id,
+      </if>
+      <if test="ordersId != null" >
+        orders_id,
+      </if>
+      <if test="placeEvaluate != null" >
+        place_evaluate,
+      </if>
+      <if test="hotelEvaluate != null" >
+        hotel_evaluate,
+      </if>
+      <if test="serviceEvaluate != null" >
+        service_evaluate,
+      </if>
+      <if test="trafficEvaluate != null" >
+        traffic_evaluate,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="evaluateTime != null" >
+        evaluate_time,
+      </if>
+      <if test="usefull != null" >
+        usefull,
+      </if>
+      <if test="useless != null" >
+        useless,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="tripId != null" >
+        #{tripId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersId != null" >
+        #{ordersId,jdbcType=BIGINT},
+      </if>
+      <if test="placeEvaluate != null" >
+        #{placeEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="hotelEvaluate != null" >
+        #{hotelEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="serviceEvaluate != null" >
+        #{serviceEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="trafficEvaluate != null" >
+        #{trafficEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null" >
+        #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usefull != null" >
+        #{usefull,jdbcType=BIGINT},
+      </if>
+      <if test="useless != null" >
+        #{useless,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tuto.pojo.po.TtCommentExample" resultType="java.lang.Integer" >
+    select count(*) from tt_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tt_comment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tripId != null" >
+        trip_id = #{record.tripId,jdbcType=BIGINT},
+      </if>
+      <if test="record.ordersId != null" >
+        orders_id = #{record.ordersId,jdbcType=BIGINT},
+      </if>
+      <if test="record.placeEvaluate != null" >
+        place_evaluate = #{record.placeEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="record.hotelEvaluate != null" >
+        hotel_evaluate = #{record.hotelEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceEvaluate != null" >
+        service_evaluate = #{record.serviceEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="record.trafficEvaluate != null" >
+        traffic_evaluate = #{record.trafficEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluateTime != null" >
+        evaluate_time = #{record.evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usefull != null" >
+        usefull = #{record.usefull,jdbcType=BIGINT},
+      </if>
+      <if test="record.useless != null" >
+        useless = #{record.useless,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tt_comment
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      trip_id = #{record.tripId,jdbcType=BIGINT},
+      orders_id = #{record.ordersId,jdbcType=BIGINT},
+      place_evaluate = #{record.placeEvaluate,jdbcType=INTEGER},
+      hotel_evaluate = #{record.hotelEvaluate,jdbcType=INTEGER},
+      service_evaluate = #{record.serviceEvaluate,jdbcType=INTEGER},
+      traffic_evaluate = #{record.trafficEvaluate,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      evaluate_time = #{record.evaluateTime,jdbcType=TIMESTAMP},
+      usefull = #{record.usefull,jdbcType=BIGINT},
+      useless = #{record.useless,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tuto.pojo.po.TtComment" >
+    update tt_comment
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="tripId != null" >
+        trip_id = #{tripId,jdbcType=BIGINT},
+      </if>
+      <if test="ordersId != null" >
+        orders_id = #{ordersId,jdbcType=BIGINT},
+      </if>
+      <if test="placeEvaluate != null" >
+        place_evaluate = #{placeEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="hotelEvaluate != null" >
+        hotel_evaluate = #{hotelEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="serviceEvaluate != null" >
+        service_evaluate = #{serviceEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="trafficEvaluate != null" >
+        traffic_evaluate = #{trafficEvaluate,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluateTime != null" >
+        evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usefull != null" >
+        usefull = #{usefull,jdbcType=BIGINT},
+      </if>
+      <if test="useless != null" >
+        useless = #{useless,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tuto.pojo.po.TtComment" >
+    update tt_comment
+    set user_id = #{userId,jdbcType=BIGINT},
+      trip_id = #{tripId,jdbcType=BIGINT},
+      orders_id = #{ordersId,jdbcType=BIGINT},
+      place_evaluate = #{placeEvaluate,jdbcType=INTEGER},
+      hotel_evaluate = #{hotelEvaluate,jdbcType=INTEGER},
+      service_evaluate = #{serviceEvaluate,jdbcType=INTEGER},
+      traffic_evaluate = #{trafficEvaluate,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      usefull = #{usefull,jdbcType=BIGINT},
+      useless = #{useless,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
