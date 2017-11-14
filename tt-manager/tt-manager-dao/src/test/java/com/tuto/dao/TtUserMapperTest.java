@@ -16,7 +16,7 @@ public class TtUserMapperTest {
     private TtUserMapper ttUserMapper;
     @Test
     public void selectByPrimaryKey() throws Exception {
-        TtUser ttUser = ttUserMapper.selectByPrimaryKey(1L);
+        TtUser ttUser = ttUserMapper.selectByPrimaryKey(2L);
         String name = ttUser.getName();
 
         System.out.println(name);
