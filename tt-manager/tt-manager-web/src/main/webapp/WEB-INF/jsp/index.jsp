@@ -28,8 +28,7 @@
         </div>
         <div title="订单管理" data-options="iconCls:'icon-tip'" style="padding:10px 0;">
             <ul class="easyui-tree">
-                <li data-options="attributes:{'href':'order-list'}">查询订单</li>
-
+                <li data-options="attributes:{'href':'orders-list'}">查询订单</li>
             </ul>
         </div>
         <div title="评论管理" data-options="iconCls:'icon-tip'" style="padding:10px 0;">

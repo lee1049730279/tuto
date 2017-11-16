@@ -2,6 +2,7 @@ package com.tuto.web;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -9,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class empty {
 
     @RequestMapping("/")
-    public String doqwe(){
+    public String doindex(){
 
         return "index";
+    }
+    @RequestMapping("/{page}")
+    public String doindex1(@PathVariable("page") String page){
+        return page;
     }
 }
