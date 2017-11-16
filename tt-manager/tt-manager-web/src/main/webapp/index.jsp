@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>页面标题3</title>
+    <title>页面标题1</title>
     <!-- 引入Bootstrap核心样式文件（必须） -->
     <link rel="stylesheet" href="css/bootstrap.css">
     <!-- 引入Bootstrap默认主题样式（可选） -->
