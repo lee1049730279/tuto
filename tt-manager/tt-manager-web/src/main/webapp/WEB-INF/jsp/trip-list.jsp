@@ -41,6 +41,7 @@
             return;
         }
         $.messager.confirm('确认','您确定要删除吗？',function(r){
+
             if(r){
                 var ids = [];
                 for(var i=0;i<selections.length;i++){
