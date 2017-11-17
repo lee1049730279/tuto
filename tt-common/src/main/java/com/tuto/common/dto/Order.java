@@ -3,7 +3,7 @@ package com.tuto.common.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**列表排序
  * User: jack
  * Date: 2017/11/8
  * Time: 17:45
