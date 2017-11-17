@@ -3,26 +3,41 @@
 <div id="ordersorders">
     <div style="padding: 5px; background-color: #fff;">
         <label>用户名称：</label>
-        <input class="easyui-textbox" type="text" id="title">
+        <input class="easyui-textbox" type="text" id="userName">
         <label>商品状态：</label>
-        <select id="status" class="easyui-combobox">
-            <option value="0">待付款</option>
+        <select id="state" class="easyui-combobox">
+            <option value="0">请选择</option>
             <option value="1">待出行</option>
             <option value="2">游玩中</option>
             <option value="3">待评价</option>
             <option value="4">已完成</option>
             <option value="5">已作废</option>
             <option value="6">待退款</option>
+            <option value="7">待付款</option>
         </select>
         <!--http://www.cnblogs.com/wisdomoon/p/3330856.html-->
         <!--注意：要加上type="button",默认行为是submit-->
         <button onclick="searchForm()" type="button" class="easyui-linkbutton">搜索</button>
+    </div>
+    <div>
+        <button onclick="changestate()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑订单状态</button>
+        <select  id="state1" class="easyui-combobox">
+            <option value="0">请选择</option>
+            <option value="1">待出行</option>
+            <option value="2">游玩中</option>
+            <option value="3">待评价</option>
+            <option value="4">已完成</option>
+            <option value="5">已作废</option>
+            <option value="6">待退款</option>
+            <option value="7">待付款</option>
+        </select>
     </div>
 </div>
 <table id="orderstb"></table>
 
 <script>
     $('#orderstb').datagrid({
+        toolbar: "#ordersorders",
         url: 'orders',
         //隔行变色，斑马线效果
         striped: true,
@@ -42,10 +57,13 @@
         columns: [[
             //field title width列属性
             {field: 'ck', checkbox: true},
-            {field: 'id', title: '订单编号', width: 100, sortable: true},
-            {field: 'tripName', title: '景点名称', width: 100, sortable: true},
+            {field: 'id', title: '订单编号', width: 100},
+            {field: 'tripName', title: '项目名称', width: 100},
             {field: 'num', title: '购买数量', width: 100},
-            {field: 'startTime', title: '出发时间', width: 100},
+            {field: 'startTime', title: '出发时间',formatter: function (value, row, index) {
+                return moment(value).format("L");
+            }
+            },
             {field: 'cityName', title: '出发地点', width: 100},
             {
                 field: 'totalPrice', title: '总价格', formatter: function (value, row, index) {
@@ -53,15 +71,49 @@
                 return number.toFixed(2);
             }
             },
-            {field: 'state', title: '订单状态', width: 100},
+            {field: 'stateName', title: '订单状态', width: 100},
             {
-                field: 'createTime', title: '订单创建时间', formatter: function (value, row, index) {
+                field: 'createTime', title: '订单创建时间', sortable: true,formatter: function (value, row, index) {
                 return moment(value).format("L");
             }
             },
-            {field: 'userName', title: '订单所属用户', width: 100},
-        ]],
-        toolbar: "#orderstoolbar"
+            {field: 'userName', title: '订单所属用户', width: 100}
+        ]]
+
     })
+   function searchForm() {
+       $('#orderstb').datagrid('load', {
+           userName: $('#userName').val(),
+           state: $('#state').combobox('getValue')
+       });
+   }
+   function changestate() {
+       var selectRows = $('#orderstb').datagrid('getSelections');
+       var state=$('#state1').combobox('getValue');
+       if(state==0){
+           $.messager.alert('提示', '未选择修改状态', 'warning');
+           return;
+       }else if(selectRows.length == 0){
+           $.messager.alert('提示', '未选中记录', 'warning');
+           return;
+       } else{
+           var ids = [];
+           for (var i = 0; i < selectRows.length; i++) {
+               ids.push(selectRows[i].id);
+           }
+           //异步提交给后台
+           $.ajax({
+               url: "orders/update/"+state,
+               type: "post",
+               data: {"ids[]": ids},
+               success: function (data) {
+                   if (data != 0) {
+                       $('#orderstb').datagrid('reload');
+                   }
+               },
+               dataType: "json"
+           })
+       }
+   }
 </script>
 
