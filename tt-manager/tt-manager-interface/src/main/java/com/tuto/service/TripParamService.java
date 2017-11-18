@@ -9,5 +9,7 @@ import java.util.List;
 public interface TripParamService {
     Result<TtTripParamCustom> listTripParamsByPage(Page page);
 
-    int updateParamBatch(List<Object> idAndOfType);
+    int updateParamBatch(List<Long> ids,List<Long> ofTypes);
+
+    int saveParam(Long cid, int ofType, String paramData);
 }

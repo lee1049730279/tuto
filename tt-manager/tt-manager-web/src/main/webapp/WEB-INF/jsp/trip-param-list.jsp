@@ -26,19 +26,15 @@
         }
         $.messager.confirm('确认','您确定要删除吗？',function(r){
             if(r){
-                var idAndOfType = [];
+                var ids = [];
+                var ofTypes = [];
                 for(var i=0;i<selections.length;i++){
-                   var list = [];
-                   list.push(selections[i].id);
-                   list.push(selections[i].ofType);
-                   idAndOfType.push(list);
-                    //list.add("id",selections[i].id);
-                   // list.add("ofType",selections[i].ofType);
+                   ids.push(selections[i].id);
+                   ofTypes.push(selections[i].ofType);
                 }
-               console.log(idAndOfType);
                 $.post(
                     'trip/param/batch',
-                    {'idAndOfType[]':idAndOfType},
+                    {'ids[]':ids,"ofTypes":ofTypes},
                     function(data){
                         $('#dgParamList').datagrid('reload');
                     },
@@ -48,7 +44,14 @@
         });
     }
 
-    function editParam(){}
+    function editParam(){
+//        var selections = $('#dgParamList').datagrid('getSelections');
+//        if(selections.length != 1){
+//            $.messager.alert('提示','请选中一条');
+//            return;
+//        }
+
+    }
 
 
     $('#dgParamList').datagrid({

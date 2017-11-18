@@ -5,6 +5,8 @@ import com.tuto.common.dto.Result;
 import com.tuto.dao.TtTripGroupParamCustomMapper;
 import com.tuto.dao.TtTripGroupParamMapper;
 import com.tuto.dao.TtTripIndependentParamMapper;
+import com.tuto.pojo.po.TtTripGroupParam;
+import com.tuto.pojo.po.TtTripIndependentParam;
 import com.tuto.pojo.vo.TtTripParamCustom;
 import com.tuto.service.TripParamService;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,13 +66,46 @@ public class TripParamServiceImpl implements TripParamService{
 
     //删除
     @Override
-    public int updateParamBatch(List<Object> idAndOfType) {
+    public int updateParamBatch(List<Long> ids,List<Long> ofTypes) {
         int i = 0;
         try {
-            for(int j=0; j<idAndOfType.size(); j++){
-
+            for(int j=0; j<ids.size(); j++){
+                if(1 == ofTypes.get(j)){
+                    ttTripGroupParamDao.deleteByPrimaryKey(ids.get(j));
+                }
+                if(2 == ofTypes.get(j)){
+                    ttTripIndependentParamDao.deleteByPrimaryKey(ids.get(j));
+                }
             }
         }catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    @Override
+    public int saveParam(Long cid, int ofType, String paramData) {
+        int i = 0;
+        try {
+            //是跟团游中的类目  存到跟团游规格表 tt_trip_group_param
+           if(1 == ofType){
+               TtTripGroupParam ttTripGroupParam = new TtTripGroupParam();
+               ttTripGroupParam.setTtGroupId(cid);
+               ttTripGroupParam.setParamData(paramData);
+               ttTripGroupParam.setCreated(new Date());
+               ttTripGroupParam.setUpdated(new Date());
+               i = ttTripGroupParamDao.insert(ttTripGroupParam);
+           }else if(2 == ofType){ //是自助游中的类目  存到自助游规格表 tt_trip_independent_param
+               TtTripIndependentParam ttTripIndependentParam = new TtTripIndependentParam();
+               ttTripIndependentParam.setTtIndependentId(cid);
+               ttTripIndependentParam.setParamData(paramData);
+               ttTripIndependentParam.setCreated(new Date());
+               ttTripIndependentParam.setUpdated(new Date());
+               i = ttTripIndependentParamDao.insert(ttTripIndependentParam);
+           }
+
+        }catch (Exception e){
             logger.error(e.getMessage(), e);
             e.printStackTrace();
         }

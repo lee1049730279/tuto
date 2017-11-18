@@ -31,7 +31,7 @@
     }
 
     function add(){
-        ddshop.addTabs("新增商品","trip-add");
+        ddshop.addTabs("新增景点","trip-add");
     }
 
     function remove(){
@@ -59,7 +59,16 @@
         });
     }
 
-    function edit(){}
+    function edit(){
+        var selections = $('#dg').datagrid('getSelections');
+        if(selections.length != 1){
+            $.messager.alert('提示','请选中一条');
+            return;
+        }
+        var id = selections[0].id;
+
+        window.location.href="${pageContext.request.contextPath}/trip_edit/"+id;
+    }
 
     function up(){
         var selections = $('#dg').datagrid('getSelections');
