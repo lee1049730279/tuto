@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
-<div id="toolbar">
+<div id="user_toolbar">
     <div style="padding: 5px; background-color: #fff;">
         <label>用户名：</label>
         <input class="easyui-textbox" type="text" id="userName">
@@ -30,7 +30,7 @@
 
     function userList(){
         $("#table").datagrid({
-            toolbar: '#toolbar',
+            toolbar: '#user_toolbar',
             url: "items",
             columns: [[
                 {field: 'ck', checkbox: true},

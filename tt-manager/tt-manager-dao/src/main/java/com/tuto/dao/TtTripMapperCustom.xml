@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtTripMapperCustom" >
+    <!--
+       * 用于插入景点并返回起主键
+      -->
+    <insert id="insert" parameterType="com.tuto.pojo.po.TtTrip" useGeneratedKeys="true" keyColumn="ID" keyProperty="id">
+        insert into tt_trip (id, title, s_title,
+        price, real_price, position_id,
+        type, traffic, hotel,
+        buy_time, good_rate, place_score,
+        hotel_score, service_score, traffic_score,
+        state, city_id)
+        values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{sTitle,jdbcType=VARCHAR},
+        #{price,jdbcType=BIGINT}, #{realPrice,jdbcType=BIGINT}, #{positionId,jdbcType=BIGINT},
+        #{type,jdbcType=INTEGER}, #{traffic,jdbcType=VARCHAR}, #{hotel,jdbcType=VARCHAR},
+        #{buyTime,jdbcType=BIGINT}, #{goodRate,jdbcType=REAL}, #{placeScore,jdbcType=REAL},
+        #{hotelScore,jdbcType=REAL}, #{serviceScore,jdbcType=REAL}, #{trafficScore,jdbcType=REAL},
+        #{state,jdbcType=INTEGER}, #{cityId,jdbcType=BIGINT})
+    </insert>
+</mapper>
