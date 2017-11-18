@@ -12,6 +12,15 @@ public class TtOrdersCustom extends TtOrders {
     private String tripName;
     private String cityName;
     private String userName;
+    private String stateName;
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
 
     public String getTripName() {
         return tripName;

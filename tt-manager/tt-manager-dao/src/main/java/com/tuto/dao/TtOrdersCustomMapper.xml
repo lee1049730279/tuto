@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtOrdersCustomMapper" >
+
+  <sql id="Base_Column_List" >
+    i.id as id, i.trip_id as tripId, i.num as num, i.start_time as startTime, i.city_id as cityId, i.total_price as totalPrice,
+    i.create_time as  createTime , i.user_id as userId,
+    o.name as userName,s.name as cityName,
+    t.title as tripName,
+     CASE i.state
+        WHEN 1 THEN "待出行"
+        WHEN 2 THEN "游玩中"
+        WHEN 3 THEN "待评价"
+        WHEN 4 THEN "已完成"
+		WHEN 5 THEN "已作废"
+		WHEN 6 THEN "待退款"
+		WHEN 7 THEN "待付款"
+		ELSE "未知" END as stateName
+  </sql>
+  <sql id="Where_Clause">
+    <where>
+      <if test="ttOrderQuery != null and ttOrderQuery.userName != null and ttOrderQuery.userName != ''">
+        and  o.name like '%${ttOrderQuery.userName}%'
+      </if>
+      <if test="ttOrderQuery != null and ttOrderQuery.state != null and ttOrderQuery.state != 0">
+        and i.state = #{ttOrderQuery.state}
+      </if>
+    </where>
+  </sql>
+  <select id="countitem" resultType="int">
+    SELECT COUNT(1) FROM tt_orders i
+    LEFT JOIN tt_user o
+    ON i.user_id = o.id
+    LEFT JOIN tt_city s
+    on i.city_id = s.id
+    LEFT JOIN tt_trip t
+    on i.trip_id = t.id
+    <include refid="Where_Clause"/>
+  </select>
+
+  <select id="listOrders" resultType="com.tuto.pojo.vo.TtOrdersCustom">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tt_orders i
+    LEFT JOIN tt_user o
+    ON i.user_id = o.id
+    LEFT JOIN tt_city s
+    on i.city_id = s.id
+    LEFT JOIN tt_trip t
+    on i.trip_id = t.id
+    <include refid="Where_Clause"/>
+    <choose>
+      <when test="order != null and order.sort != null and order.order != null">
+        GROUP  by ${OrderParams}
+      </when>
+      <otherwise>
+        ORDER BY i.create_time DESC
+      </otherwise>
+    </choose>
+    limit #{page.offset},#{page.rows}
+  </select>
+</mapper>
