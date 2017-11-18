@@ -31,7 +31,6 @@ public class OrderAction {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     @Autowired
     private OrderService orderservice;
 

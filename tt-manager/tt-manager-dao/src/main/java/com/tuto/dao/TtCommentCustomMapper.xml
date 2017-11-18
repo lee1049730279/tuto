@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtCommentCustomMapper">
+
+    <sql id="Base_Column_List">
+    tc.id,
+    tc.user_id,
+    tc.trip_id,
+    tc.orders_id as ordersId,
+    tc.place_evaluate as placeEvaluate,
+    tc.hotel_evaluate as hotelEvaluate,
+    tc.service_evaluate as serviceEvaluate,
+    tc.traffic_evaluate as trafficEvaluate,
+    tc.content,
+    tc.evaluate_time as evaluateTime,
+    tc.usefull,
+    tc.useless,
+    tu.name as userName,
+    tt.s_title as tripName
+  </sql>
+
+    <sql id="outJoinSql">
+    left JOIN tt_user tu
+      on tc.user_id = tu.id
+    left JOIN tt_trip tt
+      on tc.trip_id = tt.id
+    left JOIN tt_orders tos
+      on tc.orders_id = tos.id
+  </sql>
+
+    <select id="listComment" resultType="com.tuto.pojo.vo.TtCommentCustom">
+        select
+        <include refid="Base_Column_List"/>
+        from tt_comment tc
+        <include refid="outJoinSql"/>
+        <trim>
+            <if test="query !=null and  query.queryUserName != null and query.queryUserName != ''">
+                left join (select * from tt_user where tt_user.name like '%${query.queryUserName}%') as temp1
+                on temp1.id = tc.user_id
+            </if>
+            <if test="query !=null and  query.queryTripName != null and query.queryTripName != ''">
+                left join (select * from tt_trip where tt_trip.s_title like '%${query.queryTripName}%' or tt_trip.title like
+                '%${query.queryTripName}%') as temp2
+                on temp2.id = tc.trip_id
+            </if>
+        </trim>
+
+        <where>
+            <if test="query !=null and  query.queryUserName != null and query.queryUserName != ''">
+                and temp1.id = tc.user_id
+            </if>
+            <if test="query !=null and  query.queryTripName != null and query.queryTripName != ''">
+                and temp2.id = tc.trip_id
+            </if>
+            <if test="query !=null and  query.queryContent != null and query.queryContent != ''">
+                and tc.content like '%${query.queryContent}%'
+            </if>
+        </where>
+
+        <choose>
+            <when test="order != null and order.sort != null and order.order != null and order.orderParams !=null ">
+                <foreach collection="order.orderParams" item="item" open="order by " close="" separator=",">
+                    ${item}
+                </foreach>
+            </when>
+            <otherwise>
+                ORDER BY tc.evaluate_time DESC
+            </otherwise>
+        </choose>
+
+        limit #{page.offset},#{page.rows}
+    </select>
+
+    <select id="countComments" resultType="int">
+        select count(1)
+        from tt_comment tc
+        <include refid="outJoinSql"/>
+        <trim>
+            <if test="query !=null and  query.queryUserName != null and query.queryUserName != ''">
+                left join (select * from tt_user where tt_user.name like '%${query.queryUserName}%') as temp1
+                on temp1.id = tc.user_id
+            </if>
+            <if test="query !=null and  query.queryTripName != null and query.queryTripName != ''">
+                left join (select * from tt_trip where tt_trip.s_title like '%${query.queryTripName}%' or tt_trip.title like
+                '%${query.queryTripName}%') as temp2
+                on temp2.id = tc.trip_id
+            </if>
+        </trim>
+
+        <where>
+            <if test="query !=null and  query.queryUserName != null and query.queryUserName != ''">
+                and temp1.id = tc.user_id
+            </if>
+            <if test="query !=null and  query.queryTripName != null and query.queryTripName != ''">
+                and temp2.id = tc.trip_id
+            </if>
+            <if test="query !=null and  query.queryContent != null and query.queryContent != ''">
+                and tc.content like '%${query.queryContent}%'
+            </if>
+        </where>
+    </select>
+
+</mapper>
