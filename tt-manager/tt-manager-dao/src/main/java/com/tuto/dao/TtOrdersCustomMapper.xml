@@ -51,7 +51,9 @@
     <include refid="Where_Clause"/>
     <choose>
       <when test="order != null and order.sort != null and order.order != null">
-        GROUP  by ${OrderParams}
+        <foreach collection="order.orderParams" item="item" open="order by" close="" separator=",">
+          ${item}
+        </foreach>
       </when>
       <otherwise>
         ORDER BY i.create_time DESC

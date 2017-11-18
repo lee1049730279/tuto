@@ -31,9 +31,12 @@
             <option value="6">待退款</option>
             <option value="7">待付款</option>
         </select>
+        <button onclick="checkUserContact()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">查看订单出行用户</button>
     </div>
+    <div id="ab"></div>
 </div>
 <table id="orderstb"></table>
+<table id="orderstb1"></table>
 
 <script>
     $('#orderstb').datagrid({
@@ -77,11 +80,73 @@
                 return moment(value).format("L");
             }
             },
-            {field: 'userName', title: '订单所属用户', width: 100}
+            {field: 'userName', title: '订单所属用户', width: 100},
+            {field: 'userContact', title: '订单出行用户信息',formatter:function (value, row, index) {
+                var ss='';
+                var ss1='';
+               if(value.length!=0) {
+                   for (var i=0;i<value.length;i++){
+                        ss +="第"+(i+1)+"个出行人:　"+" 姓名:"+value[i].name+",电话号码:"+value[i].phone;
+                        ss +=",email:"+value[i].email+",生日:"+moment(value[i].birthday).format("L");
+                        ss +=",身份证号:"+value[i].cardNo;
+                       if(value[i].sex==0){
+                           ss +=",性别:男" ;
+                       }else if(value[i].sex==1){
+                           ss +=",性别:女" ;
+                       }
+                       ss +="　　　　";
+                   }
+               }
+               return ss;
+            }}
         ]]
 
     })
-   function searchForm() {
+    function formatBr(len,value){
+
+        var slengh=value.length;
+
+        var restr="";
+
+        var flag=true;
+
+        for (var i=1;i<=100;i++){
+
+            len2=i*len;
+
+            if(slengh>=len2){
+
+                flag=false;
+
+                restr+=value.substring(len2-len,len2)+"</br>"
+
+            }else{
+
+                break;
+
+            }
+
+        }
+
+        if(flag){
+
+            restr+=value;
+
+        }else{
+
+            if(len2-len<=value.length-1){
+
+                restr+=value.substring(len2-len, value.length)
+
+            }
+
+
+
+        }
+        return restr;
+
+    }
+    function searchForm() {
        $('#orderstb').datagrid('load', {
            userName: $('#userName').val(),
            state: $('#state').combobox('getValue')
@@ -115,5 +180,28 @@
            })
        }
    }
+   /*function checkUserContact(){
+       var selectRows = $('#orderstb').datagrid('getSelections');
+       console.log(selectRows[0].userId);
+       if(selectRows.length==0){
+           $.messager.alert('提示', '未选中记录', 'warning');
+           return;
+       }else{
+            var ids= [];
+           for (var i = 0; i < selectRows.length; i++) {
+               ids.push(selectRows[i].id);
+               ids.push(selectRows[i].userId);
+           }
+           $.ajax({
+               url: "orders/userContact",
+               type: "post",
+               data: {"ids[]": ids},
+               success: function (data) {
+
+               },
+               dataType: "json"
+           })
+       }
+   }*/
 </script>
 

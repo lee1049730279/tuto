@@ -24,6 +24,7 @@
                 <li data-options="attributes:{'href':'trip-add'}">新增景点</li>
                 <li data-options="attributes:{'href':'trip-list'}">查询景点</li>
                 <li data-options="attributes:{'href':'trip-param-list'}">规格参数</li>
+                <li data-options="attributes:{'href':'trip-price'}">价格列表</li>
             </ul>
         </div>
         <div title="订单管理" data-options="iconCls:'icon-tip'" style="padding:10px 0;">

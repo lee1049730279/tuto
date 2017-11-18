@@ -3,6 +3,7 @@ package com.tuto.service;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
+import com.tuto.pojo.po.TtUserContact;
 import com.tuto.pojo.vo.TtOrderQuery;
 import com.tuto.pojo.vo.TtOrdersCustom;
 
@@ -20,4 +21,6 @@ public interface OrderService {
     Result<TtOrdersCustom> listOrders(Page page, Order order, TtOrderQuery ttOrderQuery);
 
     int updateOrderSstate(List<Long> ids, Integer state);
+
+    List<TtUserContact> checkUserContact(List<Long> ids);
 }

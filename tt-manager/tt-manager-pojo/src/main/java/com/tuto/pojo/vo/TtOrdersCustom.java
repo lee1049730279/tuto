@@ -1,6 +1,9 @@
 package com.tuto.pojo.vo;
 
 import com.tuto.pojo.po.TtOrders;
+import com.tuto.pojo.po.TtUserContact;
+
+import java.util.List;
 
 /**
  * User: jack
@@ -13,6 +16,15 @@ public class TtOrdersCustom extends TtOrders {
     private String cityName;
     private String userName;
     private String stateName;
+    private List<TtUserContact> userContact;
+
+    public List<TtUserContact> getUserContact() {
+        return userContact;
+    }
+
+    public void setUserContact(List<TtUserContact> userContact) {
+        this.userContact = userContact;
+    }
 
     public String getStateName() {
         return stateName;

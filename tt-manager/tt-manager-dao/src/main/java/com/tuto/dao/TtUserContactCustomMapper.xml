@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtUserContactCustomMapper" >
+
+  <sql id="Base_Column_List" >
+    c.id, c.user_id as userId, c.phone, c.name, c.sex, c.email, c.card_no as cardNo, c.birthday
+  </sql>
+
+
+  <select id="findttUserContact" resultType="com.tuto.pojo.po.TtUserContact">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tt_user_contact c
+    LEFT JOIN tt_order_contact o ON c.id=o.user_contact_id
+    LEFT JOIN tt_orders f ON f.id=o.orders_id
+    where f.id=#{oid} AND c.user_id =#{uid}
+  </select>
+
+</mapper>

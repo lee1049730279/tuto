@@ -5,8 +5,10 @@ import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
 import com.tuto.dao.TtOrdersCustomMapper;
 import com.tuto.dao.TtOrdersMapper;
+import com.tuto.dao.TtUserContactCustomMapper;
 import com.tuto.pojo.po.TtOrders;
 import com.tuto.pojo.po.TtOrdersExample;
+import com.tuto.pojo.po.TtUserContact;
 import com.tuto.pojo.vo.TtOrderQuery;
 import com.tuto.pojo.vo.TtOrdersCustom;
 import com.tuto.service.OrderService;
@@ -15,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +35,8 @@ public class OrderServiceImpl implements OrderService{
     private TtOrdersCustomMapper ttOrdersCustomdao;
     @Autowired
     private TtOrdersMapper ttOrdersdao;
+    @Autowired
+    private TtUserContactCustomMapper ttUserContactCustomdao;
 
     @Override
     public int updateOrderSstate(List<Long> ids, Integer state) {
@@ -52,6 +57,23 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public List<TtUserContact> checkUserContact(List<Long> ids) {
+        List<TtUserContact> result=null;
+        try{
+            result =new ArrayList<>();
+            for(int i=0;i<ids.size();i=i+2){
+                Long oid = ids.get(i);
+                Long uid = ids.get(i+1);
+                result= ttUserContactCustomdao.findttUserContact(oid,uid);
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
     public Result<TtOrdersCustom> listOrders(Page page, Order order, TtOrderQuery ttOrderQuery) {
 
         Result<TtOrdersCustom> list = null;
@@ -62,7 +84,17 @@ public class OrderServiceImpl implements OrderService{
 
             list.setTotal(total);
             List<TtOrdersCustom> ordersCustomslist= ttOrdersCustomdao.listOrders(page,order,ttOrderQuery);
+
+            List<TtUserContact> result=null;
+            for(int i=0;i<ordersCustomslist.size();i++) {
+                Long oid = ordersCustomslist.get(i).getId();
+                Long uid = ordersCustomslist.get(i).getUserId();
+                result = ttUserContactCustomdao.findttUserContact(oid, uid);
+                ordersCustomslist.get(i).setUserContact(result);
+            }
             list.setRows(ordersCustomslist);
+
+
 
 
         }catch (Exception e){

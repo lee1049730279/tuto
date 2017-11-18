@@ -3,6 +3,7 @@ package com.tuto.web;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
+import com.tuto.pojo.po.TtUserContact;
 import com.tuto.pojo.vo.TtOrderQuery;
 import com.tuto.pojo.vo.TtOrdersCustom;
 import com.tuto.service.OrderService;
@@ -62,4 +63,19 @@ public class OrderAction {
         }
         return i;
     }
+    @ResponseBody
+    @RequestMapping(value="orders/userContact")
+    public List<TtUserContact> checkUserContact(@RequestParam("ids[]") List<Long> ids){
+
+        List<TtUserContact> result=null;
+        try{
+            result= orderservice.checkUserContact(ids);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }

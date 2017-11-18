@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtpriceCustomMapper" >
+
+  <sql id="Base_Column_List" >
+    p.id, p.trip_id as tripId, p.price, p.city_id as cityId,t.title as tripName,c.name as cityName
+  </sql>
+  <sql id="Where_Clause">
+    <where>
+      <if test="ttPriceQuery != null and ttPriceQuery.tripName != null and ttPriceQuery.tripName != ''">
+        and  t.title like '%${ttPriceQuery.tripName}%'
+      </if>
+      <if test="ttPriceQuery != null and ttPriceQuery.cityName != null and ttPriceQuery.cityName != ''">
+        and  c.name like '%${ttPriceQuery.cityName}%'
+      </if>
+    </where>
+  </sql>
+  <select id="count" resultType="int">
+      SELECT COUNT(1) FROM tt_price p
+
+      LEFT JOIN tt_trip t ON p.trip_id=t.id
+      LEFT JOIN tt_city c ON p.city_id=c.id
+      <include refid="Where_Clause"/>
+  </select>
+  <select id="listPrice" resultType="com.tuto.pojo.vo.TtPriceCustom">
+      SELECT
+      <include refid="Base_Column_List"/>
+      FROM tt_price p
+      LEFT JOIN tt_trip t ON p.trip_id=t.id
+      LEFT JOIN tt_city c ON p.city_id=c.id
+      <include refid="Where_Clause"/>
+       limit #{page.offset},#{page.rows}
+  </select>
+
+</mapper>
