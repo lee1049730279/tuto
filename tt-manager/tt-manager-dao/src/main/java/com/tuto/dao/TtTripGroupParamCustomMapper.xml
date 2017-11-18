@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtTripGroupParamCustomMapper" >
+
+  <sql id="Base_Column_List" >
+    p.id, p.tt_group_id, p.created, p.updated, g.name as tripCatName
+  </sql>
+  <sql id="Blob_Column_List" >
+    p.param_data as paramData
+  </sql>
+
+  <sql id="Base_Column_List_inde" >
+    p.id, p.tt_independent_id, p.created, p.updated, d.name as tripCatName
+  </sql>
+  <sql id="Blob_Column_List_inde" >
+    p.param_data as paramData
+  </sql>
+
+  <select id="countTripParams" resultType="_int">
+    select count(1) from tt_trip_group_param p
+  </select>
+
+  <select id="listTripParamsByPage" resultType="com.tuto.pojo.vo.TtTripParamCustom">
+    SELECT
+    <if test="distinct">
+      DISTINCT
+    </if>
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from tt_trip_group_param p left join tt_group g on p.tt_group_id=g.id
+    limit #{page.offset},#{page.rows}
+  </select>
+
+
+  <select id="countTripIndependentParams" resultType="_int">
+    select count(1) from tt_trip_independent_param p
+  </select>
+
+  <select id="listTripIndependentParamsByPage" resultType="com.tuto.pojo.vo.TtTripParamCustom">
+    SELECT
+    <if test="distinct">
+      DISTINCT
+    </if>
+    <include refid="Base_Column_List_inde"/>
+    ,
+    <include refid="Blob_Column_List_inde"/>
+    from tt_trip_independent_param p left join tt_independent d on p.tt_independent_id=d.id
+    limit #{page.offset},#{page.rows}
+  </select>
+</mapper>
