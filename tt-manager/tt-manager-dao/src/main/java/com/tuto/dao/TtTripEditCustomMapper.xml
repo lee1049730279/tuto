@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtTripEditCustomMapper" >
+    <sql id="Base_Column_List">
+         a.id,a.title,a.s_title As sTitle,FORMAT( a.price/100,2)AS priceView,
+		FORMAT( a.real_price/100,2)AS realPriceView,a.traffic,a.hotel,a.buy_time AS
+		buyTime,a.good_rate AS goodRate,a.place_score AS placeScore,a.hotel_score AS
+		hotelScore,a.service_score AS serviceScore,a.traffic_score AS trafficScore,
+        b.id as groupId,b.name as groupName,
+        c.id as independentId,c.name as independentName,
+		d.place_introduce AS placeIntroduce,d.hotel_introduce AS hotelIntroduce,
+		d.food_introduce AS foodIntroduce,
+        e.id AS groupParamId,e.param_data as groupParamData,
+        f.id AS independentParamId,f.param_data as independentParamData
+    </sql>
+
+    <select id="findTripById" resultType="com.tuto.pojo.vo.TtTripEditCustom" parameterType="java.lang.Long">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        tt_trip a
+        -- 关联tt_group表
+        LEFT JOIN tt_trip_group mg ON a.id = mg.trip_id
+        LEFT JOIN tt_group b ON b.id = mg.group_id
+        -- 关联 tt_independent 表
+        LEFT JOIN tt_trip_independent mi ON a.id = mi.trip_id
+        LEFT JOIN tt_independent c ON c.id = mi.independent_id
+
+        -- 关联tt_trip_detail 表
+        LEFT JOIN tt_trip_detail d ON a.id=d.trip_id
+
+        -- 关联tt_trip_group_param_trip表
+        LEFT JOIN tt_trip_group_param_trip e ON a.id=e.trip_id
+
+        -- 关联tt_trip_independent_param_trip表
+        LEFT JOIN tt_trip_independent_param_trip f ON a.id=f.trip_id
+
+        where a.id = #{id};
+    </select>
+</mapper>

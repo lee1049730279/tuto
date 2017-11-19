@@ -59,6 +59,7 @@
         });
     }
 
+    //点击编辑按钮进行跳转
     function edit(){
         var selections = $('#dg').datagrid('getSelections');
         if(selections.length != 1){
@@ -66,8 +67,7 @@
             return;
         }
         var id = selections[0].id;
-
-        window.location.href="${pageContext.request.contextPath}/trip_edit/"+id;
+        ddshop.addTabs("编辑景点","trip/edit?id="+id);
     }
 
     function up(){

@@ -27,8 +27,8 @@ var ddshop = {
     closeTabs:function(text){
         $('#tab').tabs('close',text);
     }
-
 };
+
 
 
 

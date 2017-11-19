@@ -24,10 +24,11 @@ public class TripAddAction {
     //添加商品
     @RequestMapping(value = "/trip")
     @ResponseBody
-    public int saveItem(@RequestParam("tids")List<Integer> tids, TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail){
+    public int saveItem(@RequestParam("tids")List<Integer> tids, TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail,String paramData){
+      //System.out.println(paramData);
         int i=0;
         try {
-            i=tripAddService.saveTrip(ttTrip,gid,nid,ttTripDetail,tids);
+            i=tripAddService.saveTrip(ttTrip,gid,nid,ttTripDetail,tids,paramData);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();

@@ -18,4 +18,5 @@ public class empty {
     public String doindex1(@PathVariable("page") String page){
         return page;
     }
+
 }

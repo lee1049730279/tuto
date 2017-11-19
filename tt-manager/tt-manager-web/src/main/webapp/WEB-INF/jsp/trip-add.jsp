@@ -6,9 +6,9 @@
             <tr>
                 <td class="label">景点类目：</td>
                 <td>
-                    跟团游：&nbsp;<input id="gid" name="gid" style="width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;
-                    自助游：&nbsp;<input id="nid" name="nid" style="width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;
-                    主题游：&nbsp;<input  name = "tids" id="tids"  style="width:200px;"/>
+                    跟团游：&nbsp;<input id="gid" name="gid" value="" style="width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;
+                    自助游：&nbsp;<input id="nid" name="nid" value="" style="width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;
+                    主题游：&nbsp;<input  name = "tids" id="tids" value=""  style="width:200px;"/>
                 </td>
 
                 <%--<td class="label">自助游：</td>
@@ -24,21 +24,21 @@
             <tr>
                 <td class="label">景点主题：</td>
                 <td>
-                    <input class="easyui-textbox" type="text" id="title" name="title"
+                    <input class="easyui-textbox" type="text" id="title" value="" name="title"
                            data-options="required:true" style="width:525px;">
                 </td>
             </tr>
             <tr>
                 <td class="label">景点标题：</td>
                 <td>
-                    <input class="easyui-textbox" type="text" id="sTitle" name="sTitle"
+                    <input class="easyui-textbox" type="text" id="sTitle" value="" name="sTitle"
                            data-options="required:true" style="width:525px;">
                 </td>
             </tr>
             <tr>
                 <td class="label">景点价格：</td>
                 <td>
-                    <input class="easyui-numberbox" type="text" id="priceView" name="priceView"
+                    <input class="easyui-numberbox" type="text" id="priceView" value="" name="priceView"
                            data-options="required:true,min:0,precision:2">
                     <input type="hidden" id="price" name="price">
                 </td>
@@ -165,7 +165,7 @@
 <script>
     //重置表单
     function clearForm() {
-        $("#itemAddForm").form('reset');
+        $("#tripAddForm").form('reset');
         ue.setContent('商品描述');
     }
 
@@ -179,9 +179,9 @@
                 $("#price").val($("#priceView").val()*100);
                 $("#realPrice").val($("#realPriceView").val()*100);
 
-             /*   //获取参数规格部分
+                //获取参数规格部分
                 var paramsJson=[];
-                var $liList = $('#itemAddForm .paramsShow li');
+                var $liList = $('#tripAddForm .paramsShow li');
                 $liList.each(function (i,e) {
                     var $group = $(e).find('.group');
                     var groupName = $group.text();
@@ -205,15 +205,15 @@
                     paramsJson.push(o);
                 });
                 paramsJson=JSON.stringify(paramsJson);
-                $('#paramData').val(paramsJson);*/
-
+                $('#paramData').val(paramsJson);
+                console.log(typeof($('#paramData').val()));
                 return $(this).form('validate');
             },
             success:function (data) {
                 if(data>0){
                     $.messager.alert('消息','保存成功','info');
-                    /*addTab('查询商品','item-list');
-                    closeTab('新增商品');*/
+                    /*ddshop.addTabs('查询景点','trip-list');
+                    ddshop.closeTabs('新增景点');*/
                 }
             }
         });
@@ -242,14 +242,15 @@
             if (! isLeaf){
                 $.messager.alert('警告','请选中最终的类别','warning');
                 return false;
-            }/*else{
-                //如果是叶子节点，就发送ajax请求查询tb_item_param
+            }else{
+                //如果是叶子节点，就发送ajax请求查询tt_trip_group_param
+                 $("#nid").combotree('clear');
                 $.get(
                     //url
-                    'itemParam/query/'+node.id,
+                    'groupParam/query/'+node.id,
                     //success
                     function (data) {
-                        var $outerTd = $('#itemAddForm .paramsShow td').eq(1);
+                        var $outerTd = $('#tripAddForm .paramsShow td').eq(1);
                         var $ul=$('<ul>');
                         $outerTd.empty().append($ul);
                         if(data){
@@ -274,14 +275,14 @@
                                     });
                                 }
                             });
-                            $("#itemAddForm .paramsShow").show();
+                            $("#tripAddForm .paramsShow").show();
                         }else {
-                            $("#itemAddForm .paramsShow").hide();
-                            $("#itemAddForm .paramsShow td").eq(1).empty();//第二个td
+                            $("#tripAddForm .paramsShow").hide();
+                            $("#tripAddForm .paramsShow td").eq(1).empty();//第二个td
                         }
                     }
                 );
-            }*/
+            }
         }
     });
 
@@ -302,14 +303,15 @@
             if (! isLeaf){
                 $.messager.alert('警告','请选中最终的类别','warning');
                 return false;
-            }/*else{
+            }else{
                 //如果是叶子节点，就发送ajax请求查询tb_item_param
+                $("#gid").combotree('clear');
                 $.get(
                     //url
-                    'itemParam/query/'+node.id,
+                    'independentParam/query/'+node.id,
                     //success
                     function (data) {
-                        var $outerTd = $('#itemAddForm .paramsShow td').eq(1);
+                        var $outerTd = $('#tripAddForm .paramsShow td').eq(1);
                         var $ul=$('<ul>');
                         $outerTd.empty().append($ul);
                         if(data){
@@ -334,14 +336,14 @@
                                     });
                                 }
                             });
-                            $("#itemAddForm .paramsShow").show();
+                            $("#tripAddForm .paramsShow").show();
                         }else {
-                            $("#itemAddForm .paramsShow").hide();
-                            $("#itemAddForm .paramsShow td").eq(1).empty();//第二个td
+                            $("#tripAddForm .paramsShow").hide();
+                            $("#tripAddForm .paramsShow td").eq(1).empty();//第二个td
                         }
                     }
                 );
-            }*/
+            }
         }
     });
 
@@ -373,7 +375,7 @@
         method:'get',
         valueField:'id',
         textField:'name',
-        panelHeight:'auto',
+       // panelHeight:'auto',
         multiple:true,
         formatter: function (row) {
             var opts = $(this).combobox('options');

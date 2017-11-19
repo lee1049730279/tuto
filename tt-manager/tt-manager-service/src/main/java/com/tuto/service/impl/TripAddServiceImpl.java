@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -26,10 +27,14 @@ public class TripAddServiceImpl implements TripAddService{
     private TtTripDetailMapper ttTripDetailDao;
     @Autowired
     private  TtTripThemeMapper ttTripThemeDao;
+    @Autowired
+    TtTripIndependentParamTripMapper ttTripIndependentParamTripDao;
+    /*@Autowired
+    TtTripGroupParamTripMapper ttTripGroupParamTripDao;*/
     //添加景点
     @Transactional
     @Override
-    public int saveTrip(TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail, List<Integer> tids) {
+    public int saveTrip(TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail, List<Integer> tids,String paramData) {
         int count=0;
         try {
             Random random=new Random();
@@ -51,6 +56,7 @@ public class TripAddServiceImpl implements TripAddService{
                 ttTripGroup.setGroupId(gid);
                 ttTripGroup.setTripId(tripId);
                 count+= ttTripGroupDao.insert(ttTripGroup);
+                /*TtTripGroupParamTrip ttTripGroupParamTrip=new */
             }
 
             //添加independent和trip的中间表
@@ -61,6 +67,14 @@ public class TripAddServiceImpl implements TripAddService{
                 ttTripIndependent.setIndependentId(nid);
                 ttTripIndependent.setTripId(tripId);
                 count+=ttTripIndependentDao.insert(ttTripIndependent);
+                if(paramData!=null&&paramData!=""){
+                    TtTripIndependentParamTrip ttTripIndependentParamTrip=new TtTripIndependentParamTrip();
+                    ttTripIndependentParamTrip.setTripId(tripId);
+                    ttTripIndependentParamTrip.setParamData(paramData);
+                    ttTripIndependentParamTrip.setCreated(new Date());
+                    ttTripIndependentParamTrip.setUpdated(new Date());
+                    count+=ttTripIndependentParamTripDao.insert(ttTripIndependentParamTrip);
+                }
             }
 
             //添加theme和trip的中间表
