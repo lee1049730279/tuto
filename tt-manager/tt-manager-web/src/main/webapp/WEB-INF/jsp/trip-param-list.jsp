@@ -44,11 +44,22 @@
     }
 
     function editParam(){
-//        var selections = $('#dgParamList').datagrid('getSelections');
-//        if(selections.length != 1){
-//            $.messager.alert('提示','请选中一条');
-//            return;
+        var selections = $('#dgParamList').datagrid('getSelections');
+        if(selections.length != 1){
+            $.messager.alert('提示','请选中一条');
+            return;
+        }
+        var id = selections[0].id;
+        var ofType = selections[0].ofType;
+        var tripCatName = selections[0].tripCatName;
+        console.log(tripCatName);
+//        if(ofType == 1){
+//            ddshop.addTabs("编辑景点规格模板","trip_group_param_edit/group?id="+id);
+//        }else if(ofType == 2){
+//            ddshop.addTabs("编辑景点规格模板","trip_independent_param_edit/independent?id="+id);
 //        }
+
+        ddshop.addTabs("编辑景点规格模板","trip_param_edit/paramPage?id="+id+"&ofType="+ofType+"&tripCatName="+tripCatName);
 
     }
 

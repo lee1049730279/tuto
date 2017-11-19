@@ -6,7 +6,9 @@ import com.tuto.dao.TtTripGroupParamCustomMapper;
 import com.tuto.dao.TtTripGroupParamMapper;
 import com.tuto.dao.TtTripIndependentParamMapper;
 import com.tuto.pojo.po.TtTripGroupParam;
+import com.tuto.pojo.po.TtTripGroupParamExample;
 import com.tuto.pojo.po.TtTripIndependentParam;
+import com.tuto.pojo.po.TtTripIndependentParamExample;
 import com.tuto.pojo.vo.TtTripParamCustom;
 import com.tuto.service.TripParamService;
 import org.slf4j.Logger;
@@ -105,6 +107,53 @@ public class TripParamServiceImpl implements TripParamService{
                i = ttTripIndependentParamDao.insert(ttTripIndependentParam);
            }
 
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+
+    @Override
+    public TtTripGroupParam getGroupParamById(Long id) {
+        TtTripGroupParam ttTripGroupParam = ttTripGroupParamDao.selectByPrimaryKey(id);
+        return ttTripGroupParam;
+    }
+
+    @Override
+    public TtTripIndependentParam getIndependentParamById(Long id) {
+         TtTripIndependentParam ttTripIndependentParam = ttTripIndependentParamDao.selectByPrimaryKey(id);
+        return ttTripIndependentParam;
+    }
+
+
+    @Override
+    public int editParam(Long id, int ofType, String paramData) {
+        int i = 0;
+        try {
+            //是跟团游中的类目  修改跟团游规格表 tt_trip_group_param
+            if(1 == ofType){
+                //创建更新模板
+                TtTripGroupParamExample example = new TtTripGroupParamExample();
+                TtTripGroupParamExample.Criteria criteria = example.createCriteria();
+                criteria.andIdEqualTo(id);
+
+                TtTripGroupParam ttTripGroupParam = new TtTripGroupParam();
+                ttTripGroupParam.setParamData(paramData);
+                ttTripGroupParam.setUpdated(new Date());
+                i = ttTripGroupParamDao.updateByExampleSelective(ttTripGroupParam,example);
+            }else if(2 == ofType){ //是自助游中的类目  修改自助游规格表 tt_trip_independent_param
+                //创建更新模板
+                TtTripIndependentParamExample example = new TtTripIndependentParamExample();
+                TtTripIndependentParamExample.Criteria criteria = example.createCriteria();
+                criteria.andIdEqualTo(id);
+                //
+                TtTripIndependentParam ttTripIndependentParam = new TtTripIndependentParam();
+                ttTripIndependentParam.setParamData(paramData);
+                ttTripIndependentParam.setUpdated(new Date());
+                i = ttTripIndependentParamDao.updateByExampleSelective(ttTripIndependentParam,example);
+            }
         }catch (Exception e){
             logger.error(e.getMessage(), e);
             e.printStackTrace();

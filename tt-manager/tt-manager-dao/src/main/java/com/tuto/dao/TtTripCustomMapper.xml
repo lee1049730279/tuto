@@ -36,14 +36,15 @@
     <choose>
       <when test="order != null and order.sort !=null and order.order != null and order.orderParams != null">
         <foreach collection="order.orderParams" item="item" open="order by" close="" separator=",">
-            <!--<if test="item == 'sTitle'">
-              t.s_title
+            <if test="item == 'title'">
+              t.title
 
             </if>
-          <if test="item == 'price'">
+          <if test="item == 'priceView'">
             t.price
-          </if>-->
-           t.${item}
+          </if>
+
+          /* t.${item}*/
         </foreach>
       </when>
       <otherwise>
