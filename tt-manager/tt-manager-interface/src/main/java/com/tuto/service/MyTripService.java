@@ -6,6 +6,8 @@ import com.tuto.common.dto.Result;
 import com.tuto.pojo.vo.TtPriceCustom;
 import com.tuto.pojo.vo.TtPriceQuery;
 
+import java.util.List;
+
 /**
  * User: jack
  * Date: 2017/11/17
@@ -16,4 +18,6 @@ public interface MyTripService {
 
 
     Result<TtPriceCustom> listPrice(Page page, Order order, TtPriceQuery ttPriceQuery);
+
+    int changePrice(List<Integer> ids,Float price);
 }

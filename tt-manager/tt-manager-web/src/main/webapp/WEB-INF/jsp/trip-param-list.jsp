@@ -17,7 +17,6 @@
     function addParam(){
         ddshop.addTabs("新增景点规格模板","trip-param-add");
     }
-
     function removeParam(){
         var selections = $('#dgParamList').datagrid('getSelections');
         if(selections.length==0){

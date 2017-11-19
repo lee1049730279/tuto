@@ -31,12 +31,10 @@
             <option value="6">待退款</option>
             <option value="7">待付款</option>
         </select>
-        <button onclick="checkUserContact()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">查看订单出行用户</button>
     </div>
     <div id="ab"></div>
 </div>
 <table id="orderstb"></table>
-<table id="orderstb1"></table>
 
 <script>
     $('#orderstb').datagrid({

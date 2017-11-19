@@ -17,16 +17,48 @@
         <button onclick="searchForm()" type="button" class="easyui-linkbutton">搜索</button>
     </div>
     <div>
-        <button onclick="add()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</button>
-        <button onclick="edit()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</button>
-        <button onclick="remove()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</button>
-        <button onclick="down()" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</button>
-        <button onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</button>
+        <button onclick="addprice()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</button>
+        <button onclick="editPrice()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改价格</button>
+        <button onclick="removePrice()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</button>
+        <input name="changeprice" value="" id="changeprice" type="tel" placeholder="最新价格" class="easyui-numberbox">
     </div>
+
 </div>
+
 <table id="trippricetb"></table>
 
 <script>
+    function editPrice() {
+        var price  = $("#changeprice").val();
+        var selectRows = $('#trippricetb').datagrid('getSelections');
+        if(price==null || price==''){
+            $.messager.alert('提示', '未输入价格', 'warning');
+            return;
+        }else if(selectRows.length == 0){
+            $.messager.alert('提示', '未选中记录', 'warning');
+            return;
+        }else {
+            var ids = [];
+            for (var i = 0; i < selectRows.length; i++) {
+                ids.push(selectRows[i].id);
+            }
+            $.ajax({
+                url: "changePrice?price=" + price,
+                data: {"ids[]": ids},
+                dataType: "json",
+                success: function (data) {
+                    if (data != 0) {
+                        $('#trippricetb').datagrid('reload');
+                    }
+                }
+            })
+
+        }
+
+    }
+    function addprice() {
+        ddshop.addTabs("旅游价格对照表","trip-price-add");
+    }
     $('#trippricetb').datagrid({
         toolbar: "#tripprice",
         url: 'MyTrip',
@@ -50,7 +82,10 @@
             {field: 'ck', checkbox: true},
             {field: 'id', title: '对照表ID', width: 100},
             {field: 'tripName', title: '项目名称', width: 100},
-            {field: 'price', title: '价格', width: 100},
+            {field: 'price', title: '价格', width: 100, formatter: function (value, row, index) {
+                var number = new Number(value / 100);
+                return number.toFixed(2);
+            }},
             {field: 'cityName', title: '出发城市', width: 100}
         ]]
 
