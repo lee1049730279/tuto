@@ -36,9 +36,8 @@ public class TripServiceImpl implements TripService{
         try {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("page",page);
-            map.put("order",order);
             map.put("query",query);
-
+            map.put("order",order);
             //1 创建一个响应参数实体类
             result = new Result<TtTripCustom>();
             //2 对total进行设值(符合条件的总记录数)

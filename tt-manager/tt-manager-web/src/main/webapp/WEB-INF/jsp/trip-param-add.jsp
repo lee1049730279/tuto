@@ -57,6 +57,7 @@
             option.url='groupCats?parentId='+node.id;
         },
         onBeforeSelect:function (node) {
+            $("#nid").combotree('clear');
             //判断选中节点是否为叶子节点，如果是，返回true
             var isLeaf=$("#gid").tree('isLeaf',node.target);
             //如果后台管理员选中的不是叶子节点的话，给出警告框
@@ -78,6 +79,7 @@
             option.url='independentCats?parentId='+node.id;
         },
         onBeforeSelect:function (node) {
+            $("#gid").combotree('clear');
             //判断选中节点是否为叶子节点，如果是，返回true
             var isLeaf=$("#nid").tree('isLeaf',node.target);
             //如果后台管理员选中的不是叶子节点的话，给出警告框

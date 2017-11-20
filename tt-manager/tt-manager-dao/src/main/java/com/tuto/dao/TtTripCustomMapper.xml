@@ -36,15 +36,19 @@
     <choose>
       <when test="order != null and order.sort !=null and order.order != null and order.orderParams != null">
         <foreach collection="order.orderParams" item="item" open="order by" close="" separator=",">
-            <if test="item == 'title'">
-              t.title
-
-            </if>
-          <if test="item == 'priceView'">
-            t.price
+          <if test="item == 'title desc'">
+            CONVERT(t.title USING gbk) desc
           </if>
-
-          /* t.${item}*/
+          <if test="item == 'title asc'">
+            CONVERT(t.title USING gbk) asc
+          </if>
+          <if test="item == 'priceView desc'">
+            t.price desc
+          </if>
+          <if test="item == 'priceView asc'">
+            t.price asc
+          </if>
+         /* t.${item}*/
         </foreach>
       </when>
       <otherwise>

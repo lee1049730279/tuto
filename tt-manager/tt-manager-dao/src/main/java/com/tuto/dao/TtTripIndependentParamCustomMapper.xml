@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tuto.dao.TtTripGroupParamCustomMapper" >
+<mapper namespace="com.tuto.dao.TtTripIndependentParamCustomMapper" >
 
   <sql id="Base_Column_List" >
-    p.id, p.tt_group_id as ttGroupId, p.created, p.updated, g.name as tripCatName
+    p.id, p.tt_independent_id, p.created, p.updated, d.name as tripCatName
   </sql>
   <sql id="Blob_Column_List" >
     p.param_data as paramData
   </sql>
 
-
-  <select id="countTripGroupParams" resultType="_int">
-    select count(1) from tt_trip_group_param p
+  <select id="countTripIndependentParams" resultType="_int">
+    select count(1) from tt_trip_independent_param p
   </select>
 
-  <select id="listTripGroupParamsByPage" resultType="com.tuto.pojo.vo.TtTripParamCustom">
+  <select id="listTripIndependentParamsByPage" resultType="com.tuto.pojo.vo.TtTripParamCustom">
     SELECT
     <if test="distinct">
       DISTINCT
@@ -22,7 +21,7 @@
     <include refid="Base_Column_List"/>
     ,
     <include refid="Blob_Column_List"/>
-    from tt_trip_group_param p left join tt_group g on p.tt_group_id=g.id
+    from tt_trip_independent_param p left join tt_independent d on p.tt_independent_id=d.id
     <choose>
       <when test="order != null and order.sort != null and order.order != null">
         ORDER BY p.${order.sort} ${order.order}
@@ -33,5 +32,4 @@
     </choose>
     limit #{page.offset},#{page.rows}
   </select>
-
   </mapper>

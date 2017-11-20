@@ -1,5 +1,6 @@
 package com.tuto.web;
 
+import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
 import com.tuto.pojo.po.TtTripGroupParam;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -29,11 +29,11 @@ public class TripParamAction {
 
     //列表查询规格
     @ResponseBody
-    @RequestMapping("/tripParams")
-    public Result<TtTripParamCustom> listItemParams(Page page) {
+    @RequestMapping("/tripParams/{ofType}")
+    public Result<TtTripParamCustom> listItemParams(Page page, Order order, @PathVariable(value = "ofType") int ofType) {
         Result<TtTripParamCustom> list = null;
         try {
-            list = tripParamService.listTripParamsByPage(page);
+            list = tripParamService.listTripParamsByPage(page,order,ofType);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
@@ -41,13 +41,14 @@ public class TripParamAction {
         return list;
     }
 
+
     //批量删除类别规格
     @ResponseBody
     @RequestMapping("/trip/param/batch")
     public int updateParamBatch(@RequestParam("ids[]") List<Long> ids, @RequestParam("ofTypes[]") List<Long> ofTypes) {
         int i = 0;
         try {
-            i = tripParamService.updateParamBatch(ids, ofTypes);
+            i = tripParamService.removeParamBatch(ids, ofTypes);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();

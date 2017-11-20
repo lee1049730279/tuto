@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
+<div>
+    <input type="button" value="跟团游" onclick="searchGroup()">
+    <input type="button" value="自助游" onclick="searchIndependent()">
+</div>
 <div id="toolbarParam">
     <div>
         <button onclick="addParam()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</button>
@@ -9,11 +13,19 @@
 
     </div>
 </div>
-
 <table id="dgParamList"></table>
 
 <script>
 
+    function searchGroup(){
+        var url = 'tripParams/1'
+        showData(url);
+    }
+    
+    function searchIndependent() {
+        var url = 'tripParams/2'
+        showData(url);
+    }
     function addParam(){
         ddshop.addTabs("新增景点规格模板","trip-param-add");
     }
@@ -64,40 +76,43 @@
     }
 
 
-    $('#dgParamList').datagrid({
-        title:'景点规格模板列表',
-        url:'tripParams',
-        pagination: true,
-        rownumbers: true,
-        fit: true,
-        pageSize: 20,
-        toolbar: '#toolbarParam',
-        columns: [[
-            {field: 'ck', checkbox: true},
-            {field: 'id', title: 'ID', sortable:true},
-            {field: 'tripCatName', title: '景点类目'},
-            {field: 'paramData', title: '规格（只显示分组名称）', formatter:function(value,row,index){
-                //console.log(value);
-                var obj = JSON.parse(value);
-                var arr = [];
-                $.each(obj,function(i,e){
-                    arr.push(e.group);
-                });
-                return arr.join(",");
-            }},
-            {field: 'created', title: '创建时间', formatter:function(value,row,index){
-                return moment(value).format('YYYY年MM月DD日,hh:mm:ss');
-            }},
-            {field: 'updated', title: '修改时间', formatter:function(value,row,index){
-                return moment(value).format('YYYY年MM月DD日,hh:mm:ss');
-            }},
-            {field: 'ofType', title: '类目所属类型', formatter:function(value,row,index){
-                switch(value){
-                    case 1: return '跟团游'; break;
-                    case 2: return '自助游'; break;
-                    default: return '未知'; break;
-                }
-            }}
-        ]]
-    });
+    function showData(url){
+        $('#dgParamList').datagrid({
+            title:'景点规格模板列表',
+           // url:'tripParams',
+            url:url,
+            pagination: true,
+            rownumbers: true,
+            fit: true,
+            pageSize: 20,
+            toolbar: '#toolbarParam',
+            columns: [[
+                {field: 'ck', checkbox: true},
+                {field: 'id', title: 'ID'},
+                {field: 'tripCatName', title: '景点类目'},
+                {field: 'paramData', title: '规格（只显示分组名称）', formatter:function(value,row,index){
+                    //console.log(value);
+                    var obj = JSON.parse(value);
+                    var arr = [];
+                    $.each(obj,function(i,e){
+                        arr.push(e.group);
+                    });
+                    return arr.join(",");
+                }},
+                {field: 'created', title: '创建时间', formatter:function(value,row,index){
+                    return moment(value).format('YYYY年MM月DD日,hh:mm:ss');
+                }, sortable:true},
+                {field: 'updated', title: '修改时间', formatter:function(value,row,index){
+                    return moment(value).format('YYYY年MM月DD日,hh:mm:ss');
+                }, sortable:true},
+                {field: 'ofType', title: '类目所属类型', formatter:function(value,row,index){
+                    switch(value){
+                        case 1: return '跟团游'; break;
+                        case 2: return '自助游'; break;
+                        default: return '未知'; break;
+                    }
+                }}
+            ]]
+        });
+    }
 </script>

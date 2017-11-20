@@ -9,11 +9,8 @@ import java.util.Map;
 
 public interface TtTripGroupParamCustomMapper {
 
-    int countTripParams(Map<String, Object> map);
+    int countTripGroupParams(Map<String, Object> map);
 
-    List<TtTripParamCustom> listTripParamsByPage(Map<String, Object> map);
+    List<TtTripParamCustom> listTripGroupParamsByPage(Map<String, Object> map);
 
-    int countTripIndependentParams(Map<String, Object> map);
-
-    List<TtTripParamCustom> listTripIndependentParamsByPage(Map<String, Object> map);
 }

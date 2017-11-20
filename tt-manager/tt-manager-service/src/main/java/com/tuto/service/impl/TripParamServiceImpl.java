@@ -1,9 +1,11 @@
 package com.tuto.service.impl;
 
+import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
 import com.tuto.dao.TtTripGroupParamCustomMapper;
 import com.tuto.dao.TtTripGroupParamMapper;
+import com.tuto.dao.TtTripIndependentParamCustomMapper;
 import com.tuto.dao.TtTripIndependentParamMapper;
 import com.tuto.pojo.po.TtTripGroupParam;
 import com.tuto.pojo.po.TtTripGroupParamExample;
@@ -29,34 +31,38 @@ public class TripParamServiceImpl implements TripParamService{
     @Autowired
     private TtTripGroupParamCustomMapper tripGroupParamCustomDao;
     @Autowired
+    private TtTripIndependentParamCustomMapper ttTripIndependentParamCustomDao;
+    @Autowired
     private TtTripGroupParamMapper ttTripGroupParamDao;
     @Autowired
     private TtTripIndependentParamMapper ttTripIndependentParamDao;
 
 
     @Override
-    public Result<TtTripParamCustom> listTripParamsByPage(Page page) {
+    public Result<TtTripParamCustom> listTripParamsByPage(Page page, Order order, int ofType) {
         Result<TtTripParamCustom> result = null;
         try {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("page",page);
-
-            //1 创建一个响应参数实体类
+            map.put("order",order);
             result = new Result<TtTripParamCustom>();
-            //2 对total进行设值(符合条件的总记录数)
-            int total = tripGroupParamCustomDao.countTripParams(map);
-            total += tripGroupParamCustomDao.countTripIndependentParams(map);
-            result.setTotal(total);
-            //3 对rows进行设值(指定页码显示记录集合)
-            List<TtTripParamCustom> list = tripGroupParamCustomDao.listTripParamsByPage(map);
-            for(int i=0; i<list.size(); i++){
-                list.get(i).setOfType(1);
+            List<TtTripParamCustom> list = null;
+            if(ofType == 1){
+                int total = tripGroupParamCustomDao.countTripGroupParams(map);
+                result.setTotal(total);
+                list = tripGroupParamCustomDao.listTripGroupParamsByPage(map);
+                for(int i=0; i<list.size(); i++){
+                    list.get(i).setOfType(1);
+                }
+            }else if(ofType == 2){
+                int total = ttTripIndependentParamCustomDao.countTripIndependentParams(map);
+                result.setTotal(total);
+                list = ttTripIndependentParamCustomDao.listTripIndependentParamsByPage(map);
+                for(int i=0; i<list.size(); i++){
+                    list.get(i).setOfType(2);
+                }
             }
-            List<TtTripParamCustom> list1 = tripGroupParamCustomDao.listTripIndependentParamsByPage(map);
-            for(int i=0; i<list1.size(); i++){
-                list1.get(i).setOfType(2);
-                list.add(list1.get(i));
-            }
+
             result.setRows(list);
         }catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -68,14 +74,13 @@ public class TripParamServiceImpl implements TripParamService{
 
     //删除
     @Override
-    public int updateParamBatch(List<Long> ids,List<Long> ofTypes) {
+    public int removeParamBatch(List<Long> ids,List<Long> ofTypes) {
         int i = 0;
         try {
             for(int j=0; j<ids.size(); j++){
                 if(1 == ofTypes.get(j)){
                     ttTripGroupParamDao.deleteByPrimaryKey(ids.get(j));
-                }
-                if(2 == ofTypes.get(j)){
+                }else if(2 == ofTypes.get(j)){
                     ttTripIndependentParamDao.deleteByPrimaryKey(ids.get(j));
                 }
             }
