@@ -3,6 +3,8 @@ package com.tuto.web;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
+import com.tuto.common.dto.TreeNode;
+import com.tuto.pojo.po.TtPrice;
 import com.tuto.pojo.vo.TtPriceCustom;
 import com.tuto.pojo.vo.TtPriceQuery;
 import com.tuto.service.MyTripService;
@@ -52,6 +54,30 @@ public class MyTripAction {
         int i=0;
         try {
            i= myTripService.changePrice(ids,price);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+    @ResponseBody
+    @RequestMapping("tripPriceId")
+    public List<TreeNode> tripPriceId(){
+        List<TreeNode> treeNodeList = null;
+        try {
+            treeNodeList = myTripService.tripPriceId();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return  treeNodeList;
+    }
+    @ResponseBody
+    @RequestMapping("priceAdd")
+    public  int priceAdd(TtPrice ttPrice){
+        int i=0;
+        try {
+            i= myTripService.priceAdd(ttPrice);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();

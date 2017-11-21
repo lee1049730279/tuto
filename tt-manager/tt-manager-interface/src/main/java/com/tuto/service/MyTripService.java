@@ -3,6 +3,8 @@ package com.tuto.service;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
+import com.tuto.common.dto.TreeNode;
+import com.tuto.pojo.po.TtPrice;
 import com.tuto.pojo.vo.TtPriceCustom;
 import com.tuto.pojo.vo.TtPriceQuery;
 
@@ -20,4 +22,8 @@ public interface MyTripService {
     Result<TtPriceCustom> listPrice(Page page, Order order, TtPriceQuery ttPriceQuery);
 
     int changePrice(List<Integer> ids,Float price);
+
+    List<TreeNode> tripPriceId();
+
+    int priceAdd(TtPrice ttPrice);
 }

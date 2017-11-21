@@ -5,10 +5,9 @@
         <table style="width:100%;">
             <tr>
                 <td class="label">商品价格(元)：</td>
-
                 <td><input class="easyui-numberbox" type="text" id="priceView" name="priceView"
                            data-options="required:true,min:0,precision:2">
-                    <input type="hidden" id="price" name="price">
+                    <input type="hidden" name="price" id="price">
                 </td>
             </tr>
 
@@ -19,11 +18,43 @@
                     <input id="cityId" name="cityId" style="width:200px;">
                 </td>
             </tr>
+            <tr>
+                <td class="label">景点名称：</td>
+                <td>
+                    <input id="tripId" name="tripId" style="width:200px;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="easyui-linkbutton" onclick="submitPricForm()" type="button" data-options="iconCls:'icon-ok'">保存</button>
+                    <button class="easyui-linkbutton" onclick="clearPricForm()" type="button" data-options="iconCls:'icon-undo'">重置</button>
+                </td>
+            </tr>
         </table>
     </form>
 </div>
 
 <script>
+    function submitPricForm(){
+    $("#priceaddFrom").form('submit', {
+        url:"priceAdd",
+        onSubmit:function () {
+            $("#price").val($("#priceView").val()*100) ;
+        },
+        success:function (data) {
+            if(data>0){
+                $.messager.alert('恭喜', '添加成功！');
+                ddshop.closeTabs("旅游价格对照表");
+                ddshop.closeTabs("价格列表");
+                ddshop.addTabs("价格列表","trip-price");
+            }
+        }
+    })
+
+    }
+    function clearPricForm() {
+        $('#priceaddFrom').form('reset');
+    }
     $("#cityId").combotree({
         url:'cityCats?parentId=0',
         required:true,
@@ -43,6 +74,10 @@
                 return false;
             }
         }
+    });
+    $("#tripId").combotree({
+        url:'tripPriceId',
+        required:true
     });
 
     function clearForm() {
