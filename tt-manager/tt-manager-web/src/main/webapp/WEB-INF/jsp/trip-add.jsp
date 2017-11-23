@@ -224,8 +224,11 @@
     UE.delEditor('container');
 
     //实例化富文本编辑器
-    var ue=UE.getEditor('container');
-
+    var ue = UE.getEditor('container', {
+        initialFrameWidth: '100%',
+        initialFrameHeight: '300',
+        serverUrl:'file/upload'
+    });
     //加载跟团游的树形下拉框
     $("#gid").combotree({
         url:'groupCats?parentId=0',

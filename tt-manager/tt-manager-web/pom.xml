@@ -18,8 +18,20 @@
       </dependency>
       <!-- 文件上传组件 -->
       <dependency>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+      </dependency>
+      <dependency>
           <groupId>commons-fileupload</groupId>
           <artifactId>commons-fileupload</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>com.baidu</groupId>
+          <artifactId>ueditor</artifactId>
       </dependency>
       <!--jsp相关-->
       <dependency>
