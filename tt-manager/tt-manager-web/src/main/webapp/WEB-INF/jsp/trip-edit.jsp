@@ -18,6 +18,13 @@
                 </td>
             </tr>
             <tr>
+                <td class="label">标志景点：</td>
+                <td>
+                    <input class="easyui-textbox" type="text" id="detailedAddress" value="${ttTripEditCustom.detailedAddress}" name="detailedAddress"
+                           data-options="required:true" style="width:525px;">
+                </td>
+            </tr>
+            <tr>
                 <td class="label">景点价格：</td>
                 <td>
                     <input class="easyui-numberbox" value="${ttTripEditCustom.priceView}" type="text" id="priceView" name="priceView"

@@ -10,6 +10,7 @@
     <modules>
         <module>../tt-manager</module>
         <module>../tt-common</module>
+        <module>../tt-portal-web</module>
     </modules>
     <packaging>pom</packaging>
 

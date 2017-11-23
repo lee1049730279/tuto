@@ -7,23 +7,19 @@ import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.*;
 
-/**
- * User: jack
- * Date: 2017/11/16
- * Time: 20:04
- * Version:V1.0
- */
 public class FtpUtil {
+
     /**
      * Description: 向FTP服务器上传文件
-     * @param host FTP服务器hostname
-     * @param port FTP服务器端口
+     *
+     * @param host     FTP服务器hostname
+     * @param port     FTP服务器端口
      * @param username FTP登录账号
      * @param password FTP登录密码
      * @param basePath FTP服务器基础目录
      * @param filePath FTP服务器文件存放路径。例如分日期存放：/2015/01/01。文件的路径为basePath+filePath
      * @param filename 上传到FTP服务器上的文件名
-     * @param input 输入流
+     * @param input    输入流
      * @return 成功返回true，否则返回false
      */
     public static boolean uploadFile(String host, int port, String username, String password, String basePath,
@@ -32,6 +28,9 @@ public class FtpUtil {
         FTPClient ftp = new FTPClient();
         try {
             int reply;
+            //解决storeFile上传成功但是返回false问题
+            ftp.enterLocalPassiveMode();
+            ftp.setControlEncoding("UTF-8");
             ftp.connect(host, port);// 连接FTP服务器
             // 如果采用默认端口，可以使用ftp.connect(host)的方式直接连接FTP服务器
             ftp.login(username, password);// 登录
@@ -41,7 +40,7 @@ public class FtpUtil {
                 return result;
             }
             //切换到上传目录
-            if (!ftp.changeWorkingDirectory(basePath+filePath)) {
+            if (!ftp.changeWorkingDirectory(basePath + filePath)) {
                 //如果目录不存在创建目录
                 String[] dirs = filePath.split("/");
                 String tempPath = basePath;
@@ -59,8 +58,8 @@ public class FtpUtil {
             }
             //设置上传文件的类型为二进制类型
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
-            //上传文件
-            if (!ftp.storeFile(filename, input)) {
+            //上传文件，解决了中文乱码问题
+            if (!ftp.storeFile(new String(filename.getBytes("UTF-8"),"ISO-8859-1"), input)) {
                 return result;
             }
             input.close();
@@ -78,6 +77,7 @@ public class FtpUtil {
         }
         return result;
     }
+
 
     /**
      * Description: 从FTP服务器下载文件
@@ -130,5 +130,4 @@ public class FtpUtil {
         }
         return result;
     }
-
 }

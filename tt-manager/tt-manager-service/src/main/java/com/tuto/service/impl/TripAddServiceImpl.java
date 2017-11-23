@@ -1,8 +1,10 @@
 package com.tuto.service.impl;
 
+import com.tuto.common.util.JingWeiDuUtil;
 import com.tuto.dao.*;
 import com.tuto.pojo.po.*;
 import com.tuto.service.TripAddService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -28,22 +31,40 @@ public class TripAddServiceImpl implements TripAddService{
     @Autowired
     private  TtTripThemeMapper ttTripThemeDao;
     @Autowired
-    TtTripIndependentParamTripMapper ttTripIndependentParamTripDao;
-    /*@Autowired
-    TtTripGroupParamTripMapper ttTripGroupParamTripDao;*/
+    private TtTripIndependentParamTripMapper ttTripIndependentParamTripDao;
+    @Autowired
+    private TtTripGroupParamTripMapper ttTripGroupParamTripDao;
+    @Autowired
+    private TtTripDetailedAddressMapper ttTripDetailedAddressDao;
+    @Autowired
+    private TtPositionMapper ttPositionDao;
+    @Autowired
+    private TtTripPictureMapper ttTripPictureDao;
     //添加景点
     @Transactional
     @Override
-    public int saveTrip(TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail, List<Integer> tids,String paramData) {
+    public int saveTrip(TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail, List<Integer> tids,String paramData,String detailedAddress) {
         int count=0;
         try {
+            //调用经纬度工具获取景点的经纬度
+            Map<String, Double> lngAndLat = JingWeiDuUtil.getLngAndLat(detailedAddress);
+            //获得经度
+            Double lng = lngAndLat.get("lng");
+            //获得纬度
+            Double lat = lngAndLat.get("lat");
+            //添加景点坐标
+            TtPosition ttPosition=new TtPosition();
             Random random=new Random();
-            int positionId_ = random.nextInt(999);
-            Long positionId=new Long(positionId_);
+            Long positionId=new Long( random.nextInt(999));
+            ttPosition.setId(positionId);
+            ttPosition.setP1(new Float(lng));
+            ttPosition.setP2(new Float(lat));
+            ttPosition.setLevel(1);
+            count+=ttPositionDao.insert(ttPosition);
+            //添加景点表
             ttTrip.setPositionId(positionId);
             ttTrip.setType(2);
             ttTrip.setState(2);
-            //添加景点表
             ttTripCustomDao.insert(ttTrip);
             //返回景点表的id值
             Long tripId = ttTrip.getId();
@@ -56,7 +77,14 @@ public class TripAddServiceImpl implements TripAddService{
                 ttTripGroup.setGroupId(gid);
                 ttTripGroup.setTripId(tripId);
                 count+= ttTripGroupDao.insert(ttTripGroup);
-                /*TtTripGroupParamTrip ttTripGroupParamTrip=new */
+               if (paramData!=null&&paramData!=""){
+                   TtTripGroupParamTrip ttTripGroupParamTrip=new TtTripGroupParamTrip();
+                   ttTripGroupParamTrip.setTripId(tripId);
+                   ttTripGroupParamTrip.setParamData(paramData);
+                   ttTripGroupParamTrip.setCreated(new Date());
+                   ttTripGroupParamTrip.setUpdated(new Date());
+                   count+=ttTripGroupParamTripDao.insert(ttTripGroupParamTrip);
+               }
             }
 
             //添加independent和trip的中间表
@@ -92,7 +120,29 @@ public class TripAddServiceImpl implements TripAddService{
                 ttTripDetail.setTripId(tripId);
                 count+= ttTripDetailDao.insert(ttTripDetail);
                 System.out.println(count);
+                //添加 tt_trip_picture
+                String placeIntroduce = ttTripDetail.getPlaceIntroduce();
+                String title = StringUtils.substringBefore(placeIntroduce, "\" title");
+                String s1 = StringUtils.substringAfter(title, "src=\"");
+                if(StringUtils.isNotBlank(s1))
+                {
+                    TtTripPicture ttTripPicture=new TtTripPicture();
+                    ttTripPicture.setImage(s1);
+                    ttTripPicture.setTripId(Integer.parseInt(tripId.toString()));
+                    ttTripPictureDao.insert(ttTripPicture);
+                }
             }
+
+
+
+            //添加标志性地点
+            TtTripDetailedAddress ttTripDetailedAddress=new TtTripDetailedAddress();
+           Long detailAddressId=new Long(random.nextInt(9999));
+           ttTripDetailedAddress.setId(detailAddressId);
+           ttTripDetailedAddress.setTripId(tripId);
+            ttTripDetailedAddress.setDetailedAddress(detailedAddress);
+            count+=ttTripDetailedAddressDao.insert(ttTripDetailedAddress);
+
         }catch (Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();

@@ -11,7 +11,8 @@
 		d.place_introduce AS placeIntroduce,d.hotel_introduce AS hotelIntroduce,
 		d.food_introduce AS foodIntroduce,
         e.id AS groupParamId,e.param_data as groupParamData,
-        f.id AS independentParamId,f.param_data as independentParamData
+        f.id AS independentParamId,f.param_data as independentParamData,
+        g.detailed_address AS  detailedAddress
     </sql>
 
     <select id="findTripById" resultType="com.tuto.pojo.vo.TtTripEditCustom" parameterType="java.lang.Long">
@@ -34,6 +35,9 @@
 
         -- 关联tt_trip_independent_param_trip表
         LEFT JOIN tt_trip_independent_param_trip f ON a.id=f.trip_id
+
+        -- 关联tt_trip_detailed_address表
+        LEFT JOIN tt_trip_detailed_address g ON a.id=g.trip_id
 
         where a.id = #{id};
     </select>

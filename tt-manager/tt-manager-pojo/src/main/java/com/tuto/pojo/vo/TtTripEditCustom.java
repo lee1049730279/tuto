@@ -18,6 +18,17 @@ public class TtTripEditCustom  extends TtTripCustom{
     private Integer independentParamId;
     private String independentParamData;
 
+    //查询标志性景点表
+    private String detailedAddress;
+
+    public String getDetailedAddress() {
+        return detailedAddress;
+    }
+
+    public void setDetailedAddress(String detailedAddress) {
+        this.detailedAddress = detailedAddress;
+    }
+
     public Integer getGroupId() {
         return groupId;
     }

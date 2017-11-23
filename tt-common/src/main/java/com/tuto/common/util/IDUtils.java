@@ -2,30 +2,21 @@ package com.tuto.common.util;
 
 import java.util.Random;
 
-/**
- * User: DHC
- * Date: 2017/9/6
- * Time: 22:03
- * Version:V1.0
- */
 public class IDUtils {
-
-
     /**
      * 商品id生成
      */
-    public static long getItemId() {
+    public static long genItemId(){
         //取当前时间的长整形值包含毫秒
-        long millis = System.currentTimeMillis();
+        long mills= System.currentTimeMillis();
         //加上两位随机数
-        Random random = new Random();
+        Random random=new Random();
         int end2 = random.nextInt(99);
         //如果不足两位前面补0
-        String str = millis + String.format("%02d", end2);
-        long id = new Long(str);
-        return id;
+        String str=mills+String.format("%02d",end2);
+        long id=new Long(str);
+        return  id;
     }
-
 
     /**
      * 图片名生成

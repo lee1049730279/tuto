@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 @Controller
 @Scope("prototype")
@@ -43,10 +41,10 @@ public class TripEditAction {
     //修改数据
     @RequestMapping(value = "/tripEdit")
     @ResponseBody
-    public int saveItem( TtTrip ttTrip,TtTripDetail ttTripDetail, String paramData){
+    public int updateItem( TtTrip ttTrip,TtTripDetail ttTripDetail, String paramData,String detailedAddress){
         int i=0;
         try {
-            i=tripEditService.updateTrip(ttTrip,ttTripDetail,paramData);
+            i=tripEditService.updateTrip(ttTrip,ttTripDetail,paramData,detailedAddress);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();
