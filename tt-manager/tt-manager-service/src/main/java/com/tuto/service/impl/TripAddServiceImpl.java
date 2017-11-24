@@ -120,7 +120,7 @@ public class TripAddServiceImpl implements TripAddService{
                 ttTripDetail.setTripId(tripId);
                 count+= ttTripDetailDao.insert(ttTripDetail);
                 System.out.println(count);
-                //添加 tt_trip_picture表
+                //添加 tt_trip_picture
                 String placeIntroduce = ttTripDetail.getPlaceIntroduce();
                 String title = StringUtils.substringBefore(placeIntroduce, "\" title");
                 String s1 = StringUtils.substringAfter(title, "src=\"");
