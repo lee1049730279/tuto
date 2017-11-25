@@ -5,6 +5,7 @@ import com.tuto.pojo.po.TtComment;
 public class TtCommentCustom extends TtComment {
     private String userName;
     private String tripName;
+    private String image;
 
     public String getUserName() {
         return userName;
@@ -20,5 +21,13 @@ public class TtCommentCustom extends TtComment {
 
     public void setTripName(String tripName) {
         this.tripName = tripName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -4,6 +4,7 @@ import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
 import com.tuto.pojo.po.TtComment;
+import com.tuto.pojo.vo.TtCommentCustom;
 import com.tuto.pojo.vo.TtCommentQuery;
 import com.tuto.service.CommentService;
 import org.slf4j.Logger;
@@ -24,12 +25,12 @@ public class CommentAction {
 
     @RequestMapping("/comments")
     @ResponseBody
-    public Result<TtComment> listComments(Page page, Order order, TtCommentQuery query){
+    public Result<TtComment> listComments(Page page, Order order, TtCommentQuery query) {
         Result<TtComment> result = null;
         try {
-            result = commentService.listComment(page,order,query);
-        }catch (Exception e){
-            logger.error(e.getMessage(),e);
+            result = commentService.listComment(page, order, query);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return result;
@@ -37,14 +38,18 @@ public class CommentAction {
 
     @RequestMapping("/comments/batch")
     @ResponseBody
-    public int removeBatch(@RequestParam("ids[]") List<Long> ids){
-       int i = 0;
-       try {
-           i =  commentService.removeBatch(ids);
-       }catch (Exception e){
-           logger.error(e.getMessage(),e);
-           e.printStackTrace();
-       }
-       return i;
+    public int removeBatch(@RequestParam("ids[]") List<Long> ids) {
+        int i = 0;
+        try {
+            i = commentService.removeBatch(ids);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
     }
+    //前台评论显示
+    /*public Result<TtCommentCustom> listCommentsOnPortal(){
+
+    }*/
 }
