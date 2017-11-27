@@ -4,7 +4,7 @@
 
   <sql id="Base_Column_List" >
     i.id as id, i.trip_id as tripId, i.num as num, i.start_time as startTime, i.city_id as cityId, i.total_price as totalPrice,
-    i.create_time as  createTime , i.user_id as userId,
+    i.create_time as  createTime , i.user_id as userId,f.image as image,
     o.name as userName,s.name as cityName,
     t.title as tripName,
      CASE i.state
@@ -35,6 +35,8 @@
     on i.city_id = s.id
     LEFT JOIN tt_trip t
     on i.trip_id = t.id
+    LEFT JOIN tt_trip_picture f
+    on t.id =f.trip_id
     <include refid="Where_Clause"/>
   </select>
 
@@ -48,6 +50,8 @@
     on i.city_id = s.id
     LEFT JOIN tt_trip t
     on i.trip_id = t.id
+    LEFT JOIN tt_trip_picture f
+    on t.id =f.trip_id
     <include refid="Where_Clause"/>
     <choose>
       <when test="order != null and order.sort != null and order.order != null">
@@ -61,4 +65,36 @@
     </choose>
     limit #{page.offset},#{page.rows}
   </select>
+
+  <select id="listOrdersByIdAndState" resultType="com.tuto.pojo.vo.TtOrdersCustom">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tt_orders i
+    LEFT JOIN tt_user o
+    ON i.user_id = o.id
+    LEFT JOIN tt_city s
+    on i.city_id = s.id
+    LEFT JOIN tt_trip t
+    on i.trip_id = t.id
+    LEFT JOIN tt_trip_picture f
+    on t.id =f.trip_id
+    where i.user_id=#{uid}
+    ORDER BY i.create_time DESC
+  </select>
+  <select id="findById" resultType="com.tuto.pojo.vo.TtOrdersCustom">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tt_orders i
+    LEFT JOIN tt_user o
+    ON i.user_id = o.id
+    LEFT JOIN tt_city s
+    on i.city_id = s.id
+    LEFT JOIN tt_trip t
+    on i.trip_id = t.id
+    LEFT JOIN tt_trip_picture f
+    on t.id =f.trip_id
+    where i.id=#{id}
+  </select>
+
+
 </mapper>

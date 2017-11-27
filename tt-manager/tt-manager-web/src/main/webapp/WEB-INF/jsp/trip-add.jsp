@@ -212,8 +212,8 @@
             success:function (data) {
                 if(data>0){
                     $.messager.alert('消息','保存成功','info');
-                    ddshop.closeTabs('新增景点');
-                    ddshop.addTabs('查询景点','trip-list');
+                    /*ddshop.closeTabs('新增景点');
+                    ddshop.addTabs('查询景点','trip-list')*/
 
                 }
             }

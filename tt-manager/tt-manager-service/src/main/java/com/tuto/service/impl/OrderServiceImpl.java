@@ -74,6 +74,37 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    public List<TtOrdersCustom> listOrdersById(Long uid) {
+        List<TtOrdersCustom> list=null;
+        try{
+            list=ttOrdersCustomdao.listOrdersByIdAndState(uid);
+
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    @Override
+    public TtOrdersCustom ordersById(Long id) {
+        TtOrdersCustom ttOrdersCustom=new TtOrdersCustom();
+        try{
+            ttOrdersCustom= ttOrdersCustomdao.findById(id);
+            Long uid = ttOrdersCustom.getUserId();
+
+            ttOrdersCustom.setUserContact(ttUserContactCustomdao.findttUserContact(id,uid));
+
+
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return ttOrdersCustom;
+    }
+
+    @Override
     public Result<TtOrdersCustom> listOrders(Page page, Order order, TtOrderQuery ttOrderQuery) {
 
         Result<TtOrdersCustom> list = null;
@@ -104,5 +135,23 @@ public class OrderServiceImpl implements OrderService{
         return list;
 
 
+    }
+
+    @Override
+    public int updateByid(Long id) {
+        int i=0;
+        try {
+            TtOrders ttOrders = new TtOrders();
+            ttOrders.setState(3);
+            TtOrdersExample example = new TtOrdersExample();
+            TtOrdersExample.Criteria criteria = example.createCriteria();
+            criteria.andIdEqualTo(id);
+            i = ttOrdersdao.updateByExampleSelective(ttOrders, example);
+
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return i;
     }
 }

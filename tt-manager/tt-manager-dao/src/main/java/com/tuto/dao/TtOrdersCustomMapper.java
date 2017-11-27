@@ -18,4 +18,8 @@ public interface TtOrdersCustomMapper {
     int countitem(@Param("ttOrderQuery") TtOrderQuery ttOrderQuery);
 
     List<TtOrdersCustom> listOrders(@Param("page") Page page, @Param("order") Order order,@Param("ttOrderQuery") TtOrderQuery ttOrderQuery);
+
+    List<TtOrdersCustom> listOrdersByIdAndState(@Param("uid")Long uid);
+
+    TtOrdersCustom findById(@Param("id")Long id);
 }

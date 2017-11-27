@@ -16,7 +16,16 @@ public class TtOrdersCustom extends TtOrders {
     private String cityName;
     private String userName;
     private String stateName;
+    private String image;
     private List<TtUserContact> userContact;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public List<TtUserContact> getUserContact() {
         return userContact;

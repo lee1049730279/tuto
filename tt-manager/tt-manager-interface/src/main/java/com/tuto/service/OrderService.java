@@ -23,4 +23,10 @@ public interface OrderService {
     int updateOrderSstate(List<Long> ids, Integer state);
 
     List<TtUserContact> checkUserContact(List<Long> ids);
+
+    List<TtOrdersCustom> listOrdersById(Long uid);
+
+    TtOrdersCustom ordersById(Long id);
+
+    int updateByid(Long id);
 }
