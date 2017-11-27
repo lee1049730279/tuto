@@ -50,7 +50,7 @@
                         我的订单
                         <i class="header_icon icon_arrow"></i>
                         <div class="dropdown_panel">
-                            <a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_全部订单___'])" target="_blank" href="https://i.tuniu.com/list/" rel="nofollow" class="" onclick="tuniuRecorder.push('1_1_1_2_1_1');">全部订单</a>
+                            <a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_全部订单___'])" target="_blank" href="/tuto/Orders?uid=1" rel="nofollow" class="" onclick="tuniuRecorder.push('1_1_1_2_1_1');">全部订单</a>
                             <a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_我的机票___'])" target="_blank" href="https://i.tuniu.com/list/?t=1002" rel="nofollow" class="">我的机票</a>
                             <a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_我的火车票___'])" target="_blank" href="https://i.tuniu.com/list/?t=1003" rel="nofollow" class="">我的火车票</a>
                             <a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_积分商城___'])" target="_blank" href="http://points.tuniu.com/" rel="nofollow" class="">积分商城</a>
