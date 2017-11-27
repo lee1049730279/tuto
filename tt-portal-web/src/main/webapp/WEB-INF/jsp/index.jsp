@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <include file="header.html" />
@@ -18,7 +19,82 @@
 	<link rel="stylesheet" href="css/hotelpagination.css"/>
 	<!--首页第一屏样式-->
 	<link rel="stylesheet" href="css/homepage_banner.css">
-
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+        body {
+            padding: 20px;
+        }
+        #container {
+            width: 1250px;
+            height: 400px;
+            border: 3px solid #333;
+            overflow: hidden;
+            position: relative;
+        }
+        #list {
+            width: 11200px;
+            height: 400px;
+            position: absolute;
+            z-index: 1;
+        }
+        #list img {
+            width: 1250px;
+            height: 400px;
+            float: left;
+        }
+        #buttons {
+            position: absolute;
+            height: 10px;
+            width: 150px;
+            z-index: 2;
+            bottom: 20px;
+            left: 520px;
+        }
+        #buttons span {
+            cursor: pointer;
+            float: left;
+            border: 1px solid #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            margin-right: 5px;
+        }
+        #buttons .on {
+            background: orangered;
+        }
+        .arrow {
+            cursor: pointer;
+            display: none;
+            line-height: 39px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 2;
+            top: 180px;
+            background-color: RGBA(0, 0, 0, .3);
+            color: #fff;
+        }
+        .arrow:hover {
+            background-color: RGBA(0, 0, 0, .7);
+        }
+        #container:hover .arrow {
+            display: block;
+        }
+        #prev {
+            left: 20px;
+        }
+        #next {
+            right: 20px;
+        }
+    </style>
 </head>
 <body class="index1200 " id="index1200">
 <jsp:include page="header.jsp"></jsp:include>
@@ -5079,16 +5155,44 @@
 </div>		</div>
 		<!--通栏广告位结束-->
 		<div class="tn_banner_center">
-			<div class="tn_bc_center">
-				
+			<div id="container">
+                <div id="list" style="left: -1250px;">
+                    <c:forEach items="${ad1List}" var="node" varStatus="status">
+                        <img <%--id="lunbo_1"--%>	src="${node.image}">
+                    </c:forEach>
+                </div>
+                <div id="buttons">
+                    <span index="1" class="on"></span>
+                    <span index="2"></span>
+                    <span index="3"></span>
+                    <span index="4"></span>
+                    <span index="5"></span>
+                    <span index="6"></span>
+                    <span index="7"></span>
+                </div>
+                <a href="javascript:;" id="prev" class="arrow"><</a>
+                <a href="javascript:;" id="next" class="arrow">></a>
 				<!-- 轮播图播放位置 -->
-				
-				
-				
-				
-				
-				
-			</div>
+               <%-- <ul id="mylist">
+                    <c:forEach items="${ad1List}" var="node" varStatus="status">
+                        <li>
+                            <a&lt;%&ndash; name="sfbest_hp_hp_focus_${status.index}" class="fore_pic trackref"  target="_blank"&ndash;%&gt;>
+                                <img &lt;%&ndash;id="lunbo_1"&ndash;%&gt;	src="${node.image}">
+                            </a>
+                        </li>
+                    </c:forEach>
+                </ul>--%>
+                <%--<ul id="underNum">
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">4</a></li>
+                    <li><a href="">5</a></li>
+                    <li><a href="">6</a></li>
+                    <li><a href="">7</a></li>
+                    <li><a href="">8</a></li>
+                </ul>--%>
+            </div>
 			
 			<!--顶部右侧边栏start-->
 			<div class="tn_bc_right">
@@ -5179,16 +5283,8 @@
 
 <div class="layer layer_box layer_type_2 layer_color_ganlanlv">
 	<div class="layer_header clearfix">
-	<h2>出境长线</h2>
-		<ul class="tabs">
-	    		<li class="current"  data-more="http://www.tuniu.com/abroad/"><a rel="nofollow" href="javascript:void(0)" >精选</a></li>
-				<li   data-more="http://www.tuniu.com/guide/d-ouzhou-3600/"><a rel="nofollow" href="javascript:void(0)" >欧洲</a></li>
-				<li   data-more="http://www.tuniu.com/meizhou/"><a rel="nofollow" href="javascript:void(0)" >美洲</a></li>
-				<li   data-more="http://www.tuniu.com/feizhou/"><a rel="nofollow" href="javascript:void(0)" >中东非</a></li>
-				<li   data-more="http://www.tuniu.com/aozhou/"><a rel="nofollow" href="javascript:void(0)" >澳新</a></li>
-				<li   data-more="http://www.tuniu.com/guide/d-maerdaifu-3922/"><a rel="nofollow" href="javascript:void(0)" >马代</a></li>
-				<li   data-more="http://www.tuniu.com/theme/haidao/"><a rel="nofollow" href="javascript:void(0)" >海岛</a></li>
-		</ul>
+	<h2>国内跟团游</h2>
+
 	<div class="more">
 		<a href="javascript:void(0)"  onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_更多产品___']);" >更多产品 &gt;</a>
 	</div>
@@ -5197,30 +5293,24 @@
 <ul class="layer_body_list datalazyload loading" data-lazyload-type="data" data-lazyload-from="textarea">
 <textarea data-lazyload-textarea>
       <li class="layer_body current_body clearfix" >
-       <div class="body_left">
-		   			   <h4>热门景点玩法</h4>
-			   <ul class="hot_city clearfix">
-				   					   <li>
-						   <a href="http://www.tuniu.com/g3600/whole-all-0/list-c2361-h0-i-j0_0/" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_左侧热门目的地_1-法瑞意德']);">法瑞意德						   						   </a>
-					   </li>			   					   
-				</ul>					       	
-       </div>
    <div class="body_right">
        <ul class="tab_list clearfix">
         			<!--邮轮 签证专属逻辑start-->
 							<!-- WEBS-6935 首页楼层 -->
+              <c:forEach items="${pictureList_2}" var="picture" varStatus="status">
+
 				<li class="pro_item">
 					<!--楼层图片信息开始-->
 					<div class="pro_pic">
 
 						<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-图片-[春节]<俄罗斯莫斯科圣彼得堡8-9日游>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
-																						<img src="picture/199c4703_w320_h180_c0_t0_w400_h300_c0_t0.jpg" />
+																						<img src="${picture.image}" />
 													</a>
 						<!--图片内内容-->
 						<div class="pro_mess_bg"></div>
 						<div class="pro_mess">
 							<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-文字链-<span>[春节]&lt;俄罗斯莫斯科圣彼得堡8-9日游&gt;</span>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
-								<span>[春节]&lt;俄罗斯莫斯科圣彼得堡8-9日游&gt;</span>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞							</a>
+								<span>${picture.title}</span></a>
 						</div>
 						<!--图片内内容结束-->
 					</div>
@@ -5230,15 +5320,16 @@
 					<div class="pro_infor clearfix">
 						<span class="price">
 															¥
-								<em>6482</em>
+								<em>${picture.priceView}</em>
 								<i>起</i>													</span>
 
 					<span class="satisfaction">
-						满意度 93%					 </span>
+						满意度 ${picture.goodRate}%					 </span>
 					</div>
 					</a>
 					<!--楼层产品信息结束-->
-				</li>		   			
+				</li>
+              </c:forEach>
 		</ul>
    </div>
    </li>
@@ -5247,12 +5338,237 @@
 </ul>
 </div>
 
+<div class="layer layer_box layer_type_2 layer_color_ganlanlv">
+    <div class="layer_header clearfix">
+        <h2>国外跟团游</h2>
 
+        <div class="more">
+            <a href="javascript:void(0)"  onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_更多产品___']);" >更多产品 &gt;</a>
+        </div>
+    </div>
 
+    <ul class="layer_body_list datalazyload loading" data-lazyload-type="data" data-lazyload-from="textarea">
+<textarea data-lazyload-textarea>
+      <li class="layer_body current_body clearfix" >
+   <div class="body_right">
+       <ul class="tab_list clearfix">
+        			<!--邮轮 签证专属逻辑start-->
+           <!-- WEBS-6935 首页楼层 -->
+              <c:forEach items="${pictureList_3}" var="picture3" varStatus="status">
+
+				<li class="pro_item">
+					<!--楼层图片信息开始-->
+					<div class="pro_pic">
+
+						<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-图片-[春节]<俄罗斯莫斯科圣彼得堡8-9日游>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+																						<img src="${picture3.image}" />
+													</a>
+                        <!--图片内内容-->
+						<div class="pro_mess_bg"></div>
+						<div class="pro_mess">
+							<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-文字链-<span>[春节]&lt;俄罗斯莫斯科圣彼得堡8-9日游&gt;</span>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+								<span>${picture3.title}</span></a>
+						</div>
+                        <!--图片内内容结束-->
+					</div>
+                    <!--楼层图片信息结束-->
+                    <!--楼层产品信息开始-->
+					<a href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank">
+					<div class="pro_infor clearfix">
+						<span class="price">
+															¥
+								<em>${picture3.priceView}</em>
+								<i>起</i>													</span>
+
+					<span class="satisfaction">
+						满意度 ${picture3.goodRate}%					 </span>
+					</div>
+					</a>
+                    <!--楼层产品信息结束-->
+				</li>
+              </c:forEach>
+		</ul>
+   </div>
+   </li>
+
+   </textarea>
+    </ul>
+</div>
+
+<div class="layer layer_box layer_type_2 layer_color_ganlanlv">
+    <div class="layer_header clearfix">
+        <h2>国内自助游</h2>
+
+        <div class="more">
+            <a href="javascript:void(0)"  onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_更多产品___']);" >更多产品 &gt;</a>
+        </div>
+    </div>
+
+    <ul class="layer_body_list datalazyload loading" data-lazyload-type="data" data-lazyload-from="textarea">
+<textarea data-lazyload-textarea>
+      <li class="layer_body current_body clearfix" >
+   <div class="body_right">
+       <ul class="tab_list clearfix">
+        			<!--邮轮 签证专属逻辑start-->
+           <!-- WEBS-6935 首页楼层 -->
+              <c:forEach items="${pictureList_4}" var="picture4" varStatus="status">
+
+				<li class="pro_item">picture4
+					<!--楼层图片信息开始-->
+					<div class="pro_pic">
+
+						<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-图片-[春节]<俄罗斯莫斯科圣彼得堡8-9日游>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+																						<img src="${picture4.image}" />
+													</a>
+                        <!--图片内内容-->
+						<div class="pro_mess_bg"></div>
+						<div class="pro_mess">
+							<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-文字链-<span>[春节]&lt;俄罗斯莫斯科圣彼得堡8-9日游&gt;</span>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+								<span>${picture4.title}</span></a>
+						</div>
+                        <!--图片内内容结束-->
+					</div>
+                    <!--楼层图片信息结束-->
+                    <!--楼层产品信息开始-->
+					<a href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank">
+					<div class="pro_infor clearfix">
+						<span class="price">
+															¥
+								<em>${picture4.priceView}</em>
+								<i>起</i>													</span>
+
+					<span class="satisfaction">
+						满意度 ${picture4.goodRate}%					 </span>
+					</div>
+					</a>
+                    <!--楼层产品信息结束-->
+				</li>
+              </c:forEach>
+		</ul>
+   </div>
+   </li>
+
+   </textarea>
+    </ul>
+</div>
+
+<div class="layer layer_box layer_type_2 layer_color_ganlanlv">
+    <div class="layer_header clearfix">
+        <h2>国外自助游</h2>
+
+        <div class="more">
+            <a href="javascript:void(0)"  onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_更多产品___']);" >更多产品 &gt;</a>
+        </div>
+    </div>
+
+    <ul class="layer_body_list datalazyload loading" data-lazyload-type="data" data-lazyload-from="textarea">
+<textarea data-lazyload-textarea>
+      <li class="layer_body current_body clearfix" >
+   <div class="body_right">
+       <ul class="tab_list clearfix">
+        			<!--邮轮 签证专属逻辑start-->
+           <!-- WEBS-6935 首页楼层 -->
+              <c:forEach items="${pictureList_5}" var="picture5" varStatus="status">
+
+				<li class="pro_item">
+					<!--楼层图片信息开始-->
+					<div class="pro_pic">
+
+						<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-图片-[春节]<俄罗斯莫斯科圣彼得堡8-9日游>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+																						<img src="${picture5.image}" />
+													</a>
+                        <!--图片内内容-->
+						<div class="pro_mess_bg"></div>
+						<div class="pro_mess">
+							<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-文字链-<span>[春节]&lt;俄罗斯莫斯科圣彼得堡8-9日游&gt;</span>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+								<span>${picture5.title}</span></a>
+						</div>
+                        <!--图片内内容结束-->
+					</div>
+                    <!--楼层图片信息结束-->
+                    <!--楼层产品信息开始-->
+					<a href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank">
+					<div class="pro_infor clearfix">
+						<span class="price">
+															¥
+								<em>${picture5.priceView}</em>
+								<i>起</i>													</span>
+
+					<span class="satisfaction">
+						满意度 ${picture5.goodRate}%					 </span>
+					</div>
+					</a>
+                    <!--楼层产品信息结束-->
+				</li>
+              </c:forEach>
+		</ul>
+   </div>
+   </li>
+
+   </textarea>
+    </ul>
+</div>
+
+<div class="layer layer_box layer_type_2 layer_color_ganlanlv">
+    <div class="layer_header clearfix">
+        <h2>主题游</h2>
+
+        <div class="more">
+            <a href="javascript:void(0)"  onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_更多产品___']);" >更多产品 &gt;</a>
+        </div>
+    </div>
+
+    <ul class="layer_body_list datalazyload loading" data-lazyload-type="data" data-lazyload-from="textarea">
+<textarea data-lazyload-textarea>
+      <li class="layer_body current_body clearfix" >
+   <div class="body_right">
+       <ul class="tab_list clearfix">
+        			<!--邮轮 签证专属逻辑start-->
+           <!-- WEBS-6935 首页楼层 -->
+              <c:forEach items="${pictureList_6}" var="picture6" varStatus="status">
+
+				<li class="pro_item">
+					<!--楼层图片信息开始-->
+					<div class="pro_pic">
+
+						<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-图片-[春节]<俄罗斯莫斯科圣彼得堡8-9日游>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+																						<img src="${picture6.image}" />
+													</a>
+                        <!--图片内内容-->
+						<div class="pro_mess_bg"></div>
+						<div class="pro_mess">
+							<a rel="nofollow" href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','楼层2-出境长线_产品区块_1-精选_1-文字链-<span>[春节]&lt;俄罗斯莫斯科圣彼得堡8-9日游&gt;</span>高铁无夜火车住宿，金环谢镇，克里姆林宫，冬宫，夏宫，卡洛明斯科娅庄园，莫斯科地铁，彼得保罗要塞_']);">
+								<span>${picture6.title}</span></a>
+						</div>
+                        <!--图片内内容结束-->
+					</div>
+                    <!--楼层图片信息结束-->
+                    <!--楼层产品信息开始-->
+					<a href="http://www.tuniu.com/tour/210134613#source=bb" data-pst="source=bb&ta_pst=%E9%A6%96%E9%A1%B5_%E5%87%BA%E5%A2%83%E9%95%BF%E7%BA%BF-%E7%B2%BE%E9%80%89_1&ad_id=210134613" target="_blank">
+					<div class="pro_infor clearfix">
+						<span class="price">
+															¥
+								<em>${picture6.priceView}</em>
+								<i>起</i>													</span>
+
+					<span class="satisfaction">
+						满意度 ${picture6.goodRate}%					 </span>
+					</div>
+					</a>
+                    <!--楼层产品信息结束-->
+				</li>
+              </c:forEach>
+		</ul>
+   </div>
+   </li>
+
+   </textarea>
+    </ul>
+</div>
 
 <script type='text/javascript'>
  var protocol = window.location.protocol;
- var _fxcmd=_fxcmd||[];
+ var _fxcmd=[];
  _fxcmd.sid='dffa3543c3541a0ebd1add4d151d073b';
  _fxcmd.trackAll=false;
  _fxcmd.requestUrl=protocol + '//fx.axis.tuniu.org/fx/jsServlet3';
@@ -5283,5 +5599,87 @@
 <script src="js/ga_start.js" async defer type="text/javascript"></script>
 <script type="text/javascript" src="js/fps.min.js"></script>
 <script type="text/javascript" src="js/bb_product.js"></script>
+<script type="text/javascript">
+    /* 知识点： */
+    /* this用法 */
+    /* DOM事件 */
+    /* 定时器 */
+    window.onload = function () {
+        var container = document.getElementById('container');
+        var list = document.getElementById('list');
+        var buttons = document.getElementById('buttons').getElementsByTagName('span');
+        var prev = document.getElementById('prev');
+        var next = document.getElementById('next');
+        var index = 1;
+        var timer;
+        function animate(offset) {
+//获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
+//且style.left获取的是字符串，需要用parseInt()取整转化为数字。
+            var newLeft = parseInt(list.style.left) + offset;
+            list.style.left = newLeft + 'px';
+//无限滚动判断
+            if (newLeft > -1250) {
+                list.style.left = -8750+ 'px';
+            }
+            if (newLeft < -8750) {
+                list.style.left = -1250 + 'px';
+            }
+        }
+        function play() {
+//重复执行的定时器
+            timer = setInterval(function () {
+                next.onclick();
+            }, 2000)
+        }
+        function stop() {
+            clearInterval(timer);
+        }
+        function buttonsShow() {
+//将之前的小圆点的样式清除
+            for (var i = 0; i < buttons.length; i++) {
+                if (buttons[i].className == "on") {
+                    buttons[i].className = "";
+                }
+            }
+//数组从0开始，故index需要-1
+            buttons[index - 1].className = "on";
+        }
+        prev.onclick = function () {
+            index -= 1;
+            if (index < 1) {
+                index = 7
+            }
+            buttonsShow();
+            animate(1250);
+        };
+        next.onclick = function () {
+//由于上边定时器的作用，index会一直递增下去，我们只有5个小圆点，所以需要做出判断
+            index += 1;
+            if (index > 7) {
+                index = 1
+            }
+            animate(-1250);
+            buttonsShow();
+        };
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function () {
+//优化，当前图片点击当前的小圆点不执行以下代码。
+                if (this.className == "on") {
+                    return;
+                }
+                /* 这里获得鼠标移动到小圆点的位置，用this把index绑定到对象buttons[i]上，去谷歌this的用法 */
+                /* 由于这里的index是自定义属性，需要用到getAttribute()这个DOM2级方法，去获取自定义index的属性*/
+                var clickIndex = parseInt(this.getAttribute('index'));
+                var offset = 1250 * (clickIndex - index); //这个index是当前图片停留时的index
+                animate(offset);
+                index = clickIndex; //存放鼠标点击后的位置，用于小圆点的正常显示
+                buttonsShow();
+            }
+        }
+        container.onmouseover = stop;
+        container.onmouseout = play;
+        play();
+    }
+</script>
 </body>
 </html>

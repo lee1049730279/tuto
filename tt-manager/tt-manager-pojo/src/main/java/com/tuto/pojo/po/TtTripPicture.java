@@ -1,6 +1,8 @@
 package com.tuto.pojo.po;
 
-public class TtTripPicture {
+import java.io.Serializable;
+
+public class TtTripPicture implements Serializable{
     private Long id;
 
     private String image;

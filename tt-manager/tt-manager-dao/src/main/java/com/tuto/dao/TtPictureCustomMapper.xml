@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtPictureCustomMapper" >
+    <!--查找跟团游-->
+    <select id="getPictureByGroupId" parameterType="java.lang.Integer" resultType="com.tuto.pojo.vo.TtPictureCustom">
+      SELECT
+    g.trip_id AS  tripId,t.price AS priceView,t.good_rate AS goodRate,t.title,p.image
+    FROM
+	tt_trip_group g
+    LEFT JOIN tt_trip t ON g.trip_id=t.id
+    LEFT JOIN tt_trip_picture p ON g.trip_id=p.trip_id
+    WHERE g.group_id=#{groupId} ;
+    </select>
+
+    <!--查找自助游-->
+    <select id="getPictureByIndependentId" parameterType="java.lang.Integer" resultType="com.tuto.pojo.vo.TtPictureCustom">
+        SELECT
+        i.trip_id AS  tripId,t.price AS priceView,t.good_rate AS goodRate,t.title,p.image
+        FROM
+        tt_trip_independent i
+        LEFT JOIN tt_trip t ON i.trip_id=t.id
+        LEFT JOIN tt_trip_picture p ON i.trip_id=p.trip_id
+        WHERE i.independent_id=#{independentId} ;
+    </select>
+
+    <select id="getPictureByThemeId" resultType="com.tuto.pojo.vo.TtPictureCustom">
+        SELECT
+        h.trip_id AS  tripId,t.price AS priceView,t.good_rate AS goodRate,t.title,p.image
+        FROM
+        tt_trip_theme h
+        LEFT JOIN tt_trip t ON h.trip_id=t.id
+        LEFT JOIN tt_trip_picture p ON h.trip_id=p.trip_id
+        WHERE h.id &lt;7;
+
+    </select>
+
+</mapper>

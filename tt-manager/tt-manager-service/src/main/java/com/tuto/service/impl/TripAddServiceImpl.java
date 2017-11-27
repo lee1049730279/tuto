@@ -63,7 +63,12 @@ public class TripAddServiceImpl implements TripAddService{
             count+=ttPositionDao.insert(ttPosition);
             //添加景点表
             ttTrip.setPositionId(positionId);
-            ttTrip.setType(2);
+            if(gid!=null&&gid!=0){
+                ttTrip.setType(1);
+            }
+            if(nid!=null&&nid!=0){
+                ttTrip.setType(2);
+            }
             ttTrip.setState(2);
             ttTripCustomDao.insert(ttTrip);
             //返回景点表的id值
