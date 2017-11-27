@@ -43,7 +43,8 @@ public class TripAddServiceImpl implements TripAddService{
     //添加景点
     @Transactional
     @Override
-    public int saveTrip(TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail, List<Integer> tids,String paramData,String detailedAddress) {
+    public Long saveTrip(TtTrip ttTrip, Integer gid, Integer nid, TtTripDetail ttTripDetail, List<Integer> tids, String paramData, String detailedAddress) {
+        Long tripId=null;
         int count=0;
         try {
             //调用经纬度工具获取景点的经纬度
@@ -72,7 +73,7 @@ public class TripAddServiceImpl implements TripAddService{
             ttTrip.setState(2);
             ttTripCustomDao.insert(ttTrip);
             //返回景点表的id值
-            Long tripId = ttTrip.getId();
+            tripId = ttTrip.getId();
             System.out.println(tripId);
             //添加group和trip的中间表
             if(gid!=null&&gid!=0){
@@ -152,6 +153,6 @@ public class TripAddServiceImpl implements TripAddService{
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
-        return count;
+        return tripId;
     }
 }

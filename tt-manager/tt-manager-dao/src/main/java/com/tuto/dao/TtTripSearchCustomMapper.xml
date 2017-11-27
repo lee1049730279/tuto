@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tuto.dao.TtTripSearchCustomMapper" >
+
+  <select id="listSearchTrips" resultType="com.tuto.pojo.vo.TtTripSearchCustom">
+    SELECT
+    t.id,
+    t.title,
+    t.s_title as sTitle,
+    t.price,
+    t.real_price as realPrice,
+    p.image
+    FROM
+    tt_trip t
+    LEFT JOIN tt_trip_picture p ON t.id = p.trip_id
+    WHERE
+    t.state = 1
+    order by t.id desc
+  </select>
+  
+  <select id="getById" parameterType="_long" resultType="com.tuto.pojo.vo.TtTripSearchCustom">
+    SELECT
+    t.id,
+    t.title,
+    t.s_title as sTitle,
+    t.price,
+    t.real_price as realPrice,
+    p.image
+    FROM
+    tt_trip t
+    LEFT JOIN tt_trip_picture p ON t.id = p.trip_id
+    WHERE
+    t.id = #{tripId}
+  </select>
+</mapper>

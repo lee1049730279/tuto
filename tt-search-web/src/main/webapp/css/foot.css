@@ -1,0 +1,80 @@
+﻿.list_view
+li.list_item{position:relative;border-bottom:1px dotted #ccc;width:616px;padding:15px
+0 20px 180px}.list_view
+.addto_comparison{position:absolute;left:81px;top:88px;z-index:10}.list_view
+.comparison_bg{display:inline-block;height:22px;line-height:22px;width:84px;text-align:center;vertical-align:middle;color:#404040;background:url(../images/icon_collection.png) no-repeat;background-position:0 -349px}.list_view .comparison_bg
+label{*position:relative;*top:-2px}.list_view
+.comparison_bg.select{background-position:0 -320px}.list_view .comparison_bg
+input{position:relative;top:2px;margin-right:5px}.list_view .domain button.active, .list_view .domain a.active, .list_view .domain button.disable,.filter
+.compare_price{background:url(../images/user_center_mycollect.png) no-repeat 0 0}.compared_prod{position:fixed;bottom:0;z-index:9999;_position:absolute;_bottom:-100px;_left:-100px;_overflow:visible}.list_view
+li.last{border-bottom:none}.top_detail_bg{width:800px}.compared_prod
+.top_detail{background:#ffa716;width:182px;height:32px;line-height:32px;text-align:center;display:block;font-size:12px;padding-left:20px;width:162px;float:left;cursor:pointer;color:#fff}.compared_prod
+.show{background:#ffa716;height:32px;line-height:32px}.top_detail_bg
+.top_notice{float:left;height:31px;line-height:31px;width:617px;border:1px
+solid #ccc;border-left:0 none;border-bottom:0 none;background:#fff;text-align:center}.top_detail_bg .top_notice
+span{color:#f00}.compared_prod
+.com_prod_lists{width:798px;height:76px;background-image:-moz-linear-gradient(top, #ffffff, #fffbe7);background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #fffbe7));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#fffbe7', GradientType='0');background-image:-ms-linear-gradient(top, #ffffff, #fffbe7);border-left:1px solid #ffa716;border-right:1px solid #ffa716}.index1200 .compared_prod
+.com_prod_lists{width:913px}.compared_prod .com_prod_lists
+li{float:left;width:226px;height:74px;position:relative;border:1px
+solid #ffa716;border-right:1px solid #ffd48d;border-left:0 none}.compared_prod .com_prod_lists
+li.last{width:117px;border-right:0 none}.index1200 .compared_prod .com_prod_lists
+li.last{width:232px;border-right:0 none}.compared_prod
+.prod_line{padding:10px
+25px 0;text-align:center;color:#4E9700}.compared_prod .prod_line
+.c_price{font-family:"微软雅黑"}.compared_prod
+.add_more{padding:28px
+25px;text-align:center;color:#666}.compared_prod .prod_line
+a{display:block;height:40px;overflow:hidden;text-overflow:ellipsis}.compared_prod .prod_line a:link,.compared_prod .prod_line a:visited{color:#4E9700}.compared_prod .prod_line a:hover, .compared_prod .prod_line a:hover
+.f_0053aa{color:#f00}.compared_prod .prod_line
+span.c_price{color:#f60}.compared_prod
+.delete{color:#404040;height:11px;width:11px;position:absolute;right:5px;top:5px;cursor:pointer;text-align:center;line-height:10px}.compared_prod .delete:hover{color:#f60}.compared_prod
+.cont_part{padding:10px
+10px 15px 12px;text-align:center}.compared_prod
+.com_btn{background-color:#559b0a;width:90px;height:24px;line-height:24px;color:#fff;display:block;text-align:center;font-weight:700;cursor:pointer;margin:auto}.compared_prod
+.del_btn{color:#666;margin-top:10px;display:block;cursor:pointer}.compared_prod .del_btn:hover{color:#f60}.compared_prod
+.grey{background-color:#999}.comparison_btn,.add_scroll,.addbtn{display:block;width:40px;height:40px;color:#fff;font-size:12px;text-align:center;cursor:pointer;margin:0
+0 5px 0}.comparison_btn,.compar_select,.add_scroll,.addbtn,.add_scroll:hover{background:url(../images/right_suspension.png) 0 0 no-repeat}.comparison_btn{background-position:0 -45px }.comparison_btn:hover{background-position:-50px -45px}.compar_select{background-position:-100px -45px }.add_scroll{background-position:0 -89px}.add_scroll:hover{background-position:-50px -89px}.addbtn{background-position:-100px -89px}#TN-footer,#TN-faq,#TN-app{width:1000px;margin-left:auto;margin-right:auto;clear:both}#TN-footer{width:1000px;margin:10px
+auto 20px auto;color:#777;line-height:1.9}#TN-footer a:link,#TN-footer a:visited,#TN-footer a:hover,#TN-faq a:link,#TN-faq a:visited,#TN-faq a:hover{color:#777;text-decoration:none}#TN-footer
+p{line-height:1.9;text-align:center}.TN-clear{clear:both;height:0;line-height:0;overflow:hidden}#TN-logo{width:890px;margin:auto;height:48px;padding:10px
+0}#TN-logo
+li{float:left;text-indent:-9999px}#TN-logo
+li.verisign{text-indent:0}#TN-logo li a,#TN-logo li
+p{display:block;width:110px;height:47px;background:url(../images/footer-1000.png) no-repeat;overflow:hidden}#TN-logo
+li.kxlogo{text-indent:0;overflow:visible;margin-right:6px}#TN-logo li.kxlogo
+a{overflow:visible}#TN-logo
+.netchina{background-position:0 -88px}#TN-logo
+.cyber{background-position:-115px -88px}#TN-logo
+.alipay{background-position:-230px -88px}#TN-logo
+p.verisign{background-position:-812px -136px}#TN-logo
+.isc{width:107px;background-position:-460px -88px}#TN-logo
+.shlx{width:150px;background-position:-412px -138px}#TN-logo
+.itrust{background-position:-574px -88px}#TN-logo
+.knet{background-position:-576px -136px;width:103px}#TN-logo
+.safe360{background-position:-802px -88px}#TN-logo
+.tenpay{background-position:0 -135px}#TN-logo
+.bill99{background-position:-125px -135px;width:90px}#TN-logo
+.yinlian{background-position:-224px -135px;width:180px}#TN-logo
+.zhizhao{background-position:-694px -136px;width:112px}#TN-logo
+.pata{background-position:-10px -181px;width:122px}#TN-24,#TN-links{line-height:1.9}#TN-links
+a{margin:0
+5px}#TN-faq{width:998px;margin-top:20px;padding:5px
+0;border:1px
+#eaeaea solid;font-size:12px;overflow:hidden}#TN-faq
+dl{width:168px;padding-left:30px;line-height:24px;float:left;border-left:1px #e4e4e4 solid}#TN-faq .faq-first{border:none}#TN-faq
+dt{font-weight:bold;height:24px;line-height:20px}#TN-faq
+dd{color:#666}#ft{width:1000px;background:#fff;clear:both;line-height:24px;margin:0
+auto;padding:0}.TN_corp{width:1000px;margin:0
+auto;margin:15px
+auto 0 auto;background:url(../images/line_2.jpg) left top repeat-x}.TN_corp
+.corp_bor{border:1px
+solid #e4e4e4;border-bottom:0 none}.TN_corp
+.corp_title{float:left}.TN_corp
+.corp_con{float:right;width:800px;height:58px;overflow:hidden}.TN_corp .corp_con
+li{float:left;text-align:center;border-left:1px solid #e4e4e4;margin:0
+-1px 0 0;height:60px;width:199px}.TN_corp .corp_con li a:link,.TN_corp .corp_con li a:visited{color:#717171;text-decoration:none}.TN_corp .corp_con li a:hover{color:#f60;text-decoration:underline}#footer_link{width:974px;margin:20px
+auto 0 auto;padding:10px
+12px 3px 12px;border:1px
+#e7e7e7 solid;line-height:18px;font-size:12px;color:#999}#footer_link
+dt{width:60px;float:left;clear:both}#footer_link
+dd{width:912px;float:left;padding-bottom:8px}#footer_link
+a{margin-right:5px;_margin-right:2px;+margin-right:2px}#footer_link a:link,#footer_link a:visited{color:#999;text-decoration:none}#footer_link a:hover{color:#f60;text-decoration:none}

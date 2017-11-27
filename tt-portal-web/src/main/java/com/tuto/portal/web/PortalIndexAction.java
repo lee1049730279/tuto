@@ -2,8 +2,8 @@ package com.tuto.portal.web;
 import com.tuto.common.util.PropKit;
 import com.tuto.pojo.po.TtTripPicture;
 import com.tuto.pojo.vo.TtPictureCustom;
-import com.tuto.portal.service.GalleryService;
-import com.tuto.portal.service.TtPictureCustomService;
+import com.tuto.service.GalleryService;
+import com.tuto.service.TtPictureCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Controller
 public class PortalIndexAction {
-  @Autowired
-  private GalleryService galleryService;
+    @Autowired
+    private GalleryService galleryService;
     @Autowired
     private TtPictureCustomService ttPictureCustomService;
     @RequestMapping("/")
