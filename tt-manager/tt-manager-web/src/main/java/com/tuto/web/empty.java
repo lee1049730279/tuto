@@ -12,11 +12,12 @@ public class empty {
     @RequestMapping("/")
     public String doindex(){
 
-        return "index";
+        return "manager-login";
     }
     @RequestMapping("/{page}")
     public String doindex1(@PathVariable("page") String page){
         return page;
+
     }
 
 }

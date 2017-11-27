@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>首页</title>
     <!-- 导入easyui的样式表 -->
-    <link rel="stylesheet" href="js/jquery-easyui-1.5/themes/bootstrap/easyui.css">
-    <link rel="stylesheet" href="js/jquery-easyui-1.5/themes/icon.css">
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/js/jquery-easyui-1.5/themes/icon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north'" style="height:70px;padding-left:10px;">
@@ -51,23 +51,23 @@
 </div>
 
 <!-- jquery -->
-<script src="js/jquery-easyui-1.5/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-easyui-1.5/jquery.min.js"></script>
 <!-- jquery easyui -->
-<script src="js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
-<script src="js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
 <!--引入日期处理库-->
-<script src="js/moment/moment-with-locales.js"></script>
+<script src="${pageContext.request.contextPath}/js/moment/moment-with-locales.js"></script>
 <script>
     moment.locale('zh-cn');
 </script>
 
 <!-- ueditor配置文件 -->
-<script type="text/javascript" src="js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ueditor/ueditor.config.js"></script>
 <!-- ueditor编辑器源码文件 -->
-<script type="text/javascript" src="js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ueditor/ueditor.all.js"></script>
 
 <!-- 自定义脚本 -->
-<script src="js/common.js"></script>
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
 <!-- 自定义js -->
 <script>
     ddshop.registerMenuEvent();

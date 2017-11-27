@@ -3,6 +3,7 @@ package com.tuto.web;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
+import com.tuto.pojo.po.TtManager;
 import com.tuto.pojo.vo.TtUserCustom;
 import com.tuto.pojo.vo.TtUserQuery;
 import com.tuto.service.UserService;
@@ -69,5 +70,25 @@ public class UserAction {
             e.printStackTrace();
         }
         return updateNum;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/manager/login")
+    public String managerLogin(String username,String password){
+
+        String status="";
+        TtManager ttManager=userService.doLogin(username,password);
+        if(ttManager!=null) {
+            status = "200";
+        }
+        return status;
+
+    }
+    @RequestMapping("/loginin")
+    public String managerLoginSuccess(){
+
+        return "index";
+
     }
 }

@@ -3,8 +3,12 @@ package com.tuto.service.impl;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
+import com.tuto.common.util.MD5Utils;
+import com.tuto.dao.TtManagerMapper;
 import com.tuto.dao.TtUserCustomMapper;
 import com.tuto.dao.TtUserMapper;
+import com.tuto.pojo.po.TtManager;
+import com.tuto.pojo.po.TtManagerExample;
 import com.tuto.pojo.po.TtUser;
 import com.tuto.pojo.po.TtUserExample;
 import com.tuto.pojo.vo.TtUserCustom;
@@ -36,6 +40,8 @@ public class UserServiceImpl implements UserService {
     private TtUserCustomMapper ttUserCustomDao;
     @Autowired
     private TtUserMapper ttUserDao;
+    @Autowired
+    private TtManagerMapper ttManagerDao;
 
     //分页查询
     @Override
@@ -111,5 +117,34 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return updateNum;
+    }
+
+    /**
+     * 后台登录
+     * @param username
+     * @param password
+     * @return
+     */
+
+    @Override
+    public TtManager doLogin(String username, String password) {
+
+        //密码加密
+        String md5 = MD5Utils.getMd5Value(password);
+
+        TtManagerExample example=new TtManagerExample();
+        TtManagerExample.Criteria criteria=example.createCriteria();
+        criteria.andNameEqualTo(username);
+        criteria.andPasswordEqualTo(md5);
+
+
+        List<TtManager> ttManagers = ttManagerDao.selectByExample(example);
+
+        if(ttManagers.size()!=0){
+            return ttManagers.get(0);
+        }else{
+            return null;
+        }
+
     }
 }
