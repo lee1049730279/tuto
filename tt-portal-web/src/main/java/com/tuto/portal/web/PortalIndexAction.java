@@ -21,7 +21,7 @@ public class PortalIndexAction {
     public  String portalIndex(Model model){
         //第一步：使用service去查,根据tb_content_catagoryde ID去查
         Long tripId= PropKit.use("ftp.properties").getLong("ftp.gallery");
-       List<TtTripPicture> list= galleryService.listGallerysByTripId(tripId);
+        List<TtTripPicture> list= galleryService.listGallerysByTripId(tripId);
         List<TtPictureCustom> list1 = ttPictureCustomService.getPictureByGroupId(2);
         List<TtPictureCustom> list2 = ttPictureCustomService.getPictureByGroupId(3);
         List<TtPictureCustom> list3 = ttPictureCustomService.getPictureByIndependentId(2);
