@@ -10,6 +10,7 @@
 	<meta name="author" content="GeeksLabs">
 	<meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 	<link rel="shortcut icon" href="img/favicon.png">
+	<link rel="stylesheet" type="text/css" href="js/sweetalert/sweetalert.css">
 
 	<title>tuto登录</title>
 
@@ -29,6 +30,8 @@
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="js/sweetalert/sweetalert.css">
 	<![endif]-->
 </head>
 
@@ -36,34 +39,84 @@
 
 <div class="container">
 
-	<form class="login-form" action="index.html">
+	<form class="login-form" id="form1">
 		<div class="login-wrap">
 			<p class="login-img"><i class="icon_lock_alt"></i></p>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="icon_profile"></i></span>
-				<input type="text" class="form-control" placeholder="Username" autofocus>
+				<input type="text" class="form-control" name="phone" placeholder="手机号" autofocus>
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="icon_key_alt"></i></span>
-				<input type="password" class="form-control" placeholder="Password">
+				<input type="password" class="form-control" placeholder="密码" name="password">
 			</div>
 			<label class="checkbox">
-				<input type="checkbox" value="remember-me"> Remember me
-				<span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+				<input type="checkbox" value="remember-me"> 记住我
+				<span class="pull-right"> <a href="#"> 忘记密码?</a></span>
 			</label>
-			<button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-			<button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+			<button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
+			<button class="btn btn-info btn-lg btn-block" type="button" onclick="toRegister()">注册</button>
 		</div>
 	</form>
 
 </div>
-
-
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="js/jQuery.time.js" type="text/javascript"></script>
+<script src="js/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<script src="js/jquery-validation/jquery.form.js" type="text/javascript"></script>
+<script src="js/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery-validation/localization/messages_zh.min.js"></script>
 </body>
 </html>
 
 
+<script>
+	function toRegister(){
+	    location.href="http://localhost:8089/tuto/register";
+	}
 
+
+    $("#form1").validate({
+        rules: {
+            phone: 'required',
+            password: 'required'
+        } ,
+        messages: {
+            phone: '请输入手机号',
+            password: '请输入密码'
+        },
+        submitHandler:function(form){
+            $(form).ajaxSubmit({
+                type:'post',
+                url: 'doLogin',
+                success: function(data){
+                    var redirectUrl = "${redirect}";
+                    if(data.success){
+                        swal({
+
+                                title: '提示',
+                                text: data.message,
+                                confirmButtonText: "确定"
+                            },
+                            function(){
+                                if (redirectUrl == "") {
+                                    location.href = "http://localhost:8081/tuto";
+                                } else {
+                                    location.href = redirectUrl;
+                                }
+                            });
+                    }else{
+                        swal(data.message);
+                    }
+                }
+            });
+        }
+    });
+
+
+
+</script>
 
 
 <%--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">--%>
