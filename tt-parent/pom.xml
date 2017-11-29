@@ -56,6 +56,12 @@
         <freemarker.version>2.3.23</freemarker.version>
         <quartz.version>2.2.2</quartz.version>
         <lucene.version>4.10.3</lucene.version>
+        <commons-httpclient.version>3.0-rc4</commons-httpclient.version>
+        <commons-logging.version>1.0.4</commons-logging.version>
+        <dom4j.version>1.6.1</dom4j.version>
+
+
+
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -101,6 +107,8 @@
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec.version}</version>
             </dependency>
+
+
             <dependency>
                 <groupId>com.baidu</groupId>
                 <artifactId>ueditor</artifactId>
@@ -324,6 +332,23 @@
                 <version>${freemarker.version}</version>
             </dependency>
 
+            <!--短信接口-->
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.0-rc4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.0.4</version>
+            </dependency>
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>1.6.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

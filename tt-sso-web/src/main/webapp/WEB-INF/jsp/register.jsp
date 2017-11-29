@@ -1,189 +1,184 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html>
 <head>
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
-    <title>注册-个人用户</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/headerfooter.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.alerts.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/headerfooterindex.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.5.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/passport.common.js?v20140531"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.alerts.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/png.js?v20140521"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>tuto注册</title>
+    <link rel="stylesheet" media="screen" href="css/css.css" />
+    <link rel="stylesheet" type="text/css" href="js/sweetalert/sweetalert.css">
 </head>
-<body>
-		<!-- header -->
-		<div class="header">
-			<a href="http://www.e3mall.cn"><img src="${pageContext.request.contextPath}/images/logo.png" border="0" /><span>欢迎注册</span></a>
-		</div>
-
-		<!--mainStart-->
-						<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reg.css?v20140432" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/allMail.js?v20140430"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/reg.js?v20150122"></script>
-<!-- reg_main -->
-<div class="tabBox clear">
-    <span class="reg_hide reg_show regMr5" id="regper">个人用户</span>
-    <span class="reg_hide" id="regcom" style="">企业用户</span>    <div class="login">已有账号，立即 <a href="${pageContext.request.contextPath}/page/login">登录</a></div>
-</div>
-<!--个人用户-->
-<div class="reg_main reg_border regTab" id="perDiv">
-    <ul class="individualUserBg">
-        <form id="regForm_mod" name="regForm_mod" method="post"  >
-
-            <li class="regMb30">
-                <label><font>*</font> 账户名：</label>
-            <span class="regM defaultBorder">
-            	<input id="regName" name="username"  class="regInput" type="text" onkeyup="mail_div(event);" onfocus="showtip('regName','userMamErr',8);" onblur="ckmem();" autocomplete="off" maxlength="80"/>
-				<em></em>
-            </span>
-                <span class="regInput" id="userMamErr"></span>
-            </li>
-            <div node-type="layer" class="accountSearch" style="display:none;" id="person_mail"></div>
-            <li>
-                <label><font>*</font> 登录密码：</label>
-            <span class="regM defaultBorder">
-            	<input id="pwd" name="password" class="regInput" autocomplete="off" type="password" onfocus="showPwdtip('password','passwordErr',2);"  onkeyup="ckpwd(0,1);" onblur="ckpwd(0,0);"/>
-            	<em ></em>
-            </span>
-                <span class="regInput" id="passwordErr"></span>
-            </li>
-            <li class="safetyLayer regPl191" id="pwdStrong">
-                <font style="font-size:12px;">安全程度：</font><em class="default">弱</em><em class="default">中</em><em class="default">强</em>
-            </li>
-
-            <li class="regMb30">
-                <label><font>*</font> 确认密码：</label>
-            <span class="regM defaultBorder">
-            	<input id="pwdRepeat" name="password2" autocomplete="off" class="regInput" type="password" onfocus="showtip('password2','password2Err',3);" onblur="ckpwd2();"/>
-            	<em></em>
-            </span>
-                <span class="regInput" id="password2Err"></span>
-            </li>
-            <li class="regMb30">
-                <label><font>*</font> 验证手机：</label>
-            <span class="regM defaultBorder">
-            	<input id="phone" name="phone" autocomplete="off" class="regInput" type="text" maxlength="11" onfocus="showtip('phone','phoneErr',1);" onblur="$('#phoneErr').html('')"/>
-            	<em></em>
-            </span>
-                <span class="regInput" id="phoneErr"></span>
-            </li>
-
-            
-
-            <li class="regPl88">
-			<span  class="regM" style="margin-left:29px">
-				<input id="AgreeId" name="AgreeId" type="checkbox" checked="" onclick="ckAgree();">
-				<a href="https://passport.e3mall.cn/xy.html" target="_blank"  class="checkTitle">我已阅读并同意<font style="font-size:12px;">《宜立方商城用户注册协议》</font></a>
-			</span>
-                <span  id="AgreeIdErr" ></span>
-            </li>
-            <li class="register regPl88 regMt10" id="sub_per" style="margin-left:29px">
-                <input type="hidden" id="tjuid" name="tjuid" value="">
-                <a href="javascript:void(0);" class="registerNow" id="reg_per_data" onclick="REGISTER.reg()">立即注册</a>
-            </li>
-            <br /><br />
-        </form>
+<div style="display:none"><p><a href="http://mathiasbynens.be/demo/jquery-size" target="_blank" data-mce-href="http://mathiasbynens.be/demo/jquery-size"></a></p><p></p></div>
+<form id="msform" method="post">
+    <!-- progressbar -->
+    <ul id="progressbar">
+        <li class="active">账户设置</li>
+        <li>短信验证</li>
+        <li>个人信息</li>
     </ul>
-    <div class="ui-reg-tip"><a href="http://help.e3mall.cn/140/6788.html" target="_blank">了解更多>></a></div>
-</div>
+    <!-- fieldsets -->
+    <fieldset>
+        <h2 class="fs-title">创建你的账户</h2>
+        <h3 class="fs-subtitle">第一步</h3>
+        <input type="text" id="phone" name="phone" placeholder="手机号" />
+        <input type="password" name="password" placeholder="密码" />
+        <input type="password" name="repassword" placeholder="确认密码" />
+        <input type="button" name="next" class="next action-button" value="下一步" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">验证账户</h2>
+        <h3 class="fs-subtitle">第二步</h3>
+        <input type="text" name="phoneCode" placeholder="手机号验证" />
+        <div id="hiddenVal">
 
-<!--mainOver-->
+        </div>
 
-		<!--footerStart-->
-		<div class="footer">
-			<span>
-				<a href="http://www.e3mall.cn/www/379/5109.html" rel="nofollow" class="footerlink1">关于我们</a> | 
-				<a href="http://www.e3mall.cn/www/380/5116.html" rel="nofollow" class="footerlink1">联系我们</a> | 
-				<a href="http://www.e3mall.cn/www/381/5117.html" rel="nofollow" class="footerlink1">招聘人才</a> | 
-				<a href="http://www.e3mall.cn/www/330/2705.html" rel="nofollow" class="footerlink1">友情链接</a> | 
-				<a href="http://supplier.e3mall.cn/supplierApply" rel="nofollow" class="footerlink1">供应商申请</a>
-			</span>
-			<p> 
-				北京宜立方电子商务有限公司<br />
-				北京市公安局顺义分局备案11011302000890号|<a href="http://www.miibeian.gov.cn" target="_blank" rel="nofollow" class="footerlink1">京ICP备12011349号</a>|<a href="http://www.e3mall.cn/www/174/461.html" target="_blank" rel="nofollow" class="footerlink1">企业营业执照</a><br />
-				Copyright© 宜立方商城 e3mall.cn 版权所有<br /> 
-			</p>
-		</div>
-		<!-- /footer -->
-<script type="text/javascript">
-	var REGISTER={
-		param:{
-			//单点登录系统的url
-			surl:""
-		},
-		inputcheck:function(){
-			var flag = true;
-			//不能为空检查
-			if ($("#regName").val() == "") {
-				showError("regName","userMamErr",defaultArr[8]);
-				flag = false;
-			}
-			if ($("#pwd").val() == "") {
-				showError("pwd","passwordErr",pwdArr[0]);
-				flag = false;
-			}
-			if ($("#phone").val() == "") {
-				showError("phone","phoneErr",memArr[0]);
-				flag = false;
-			}
-			//密码检查
-			if ($("#pwd").val() != $("#pwdRepeat").val()) {
-				showError("pwdRepeat","password2Err",pwd2Arr[1]);
-				flag = false;
-			}
-			return flag;
-		},
-		beforeSubmit:function() {
-				//检查用户是否已经被占用
-				$.ajax({
-	            	url : REGISTER.param.surl + "/user/check/"+escape($("#regName").val())+"/1?r=" + Math.random(),
-	            	success : function(data) {
-	            		if (data.data) {
-	            			//检查手机号是否存在
-	            			$.ajax({
-	            				url : REGISTER.param.surl + "/user/check/"+$("#phone").val()+"/2?r=" + Math.random(),
-				            	success : function(data) {
-				            		if (data.data) {
-					            		REGISTER.doSubmit();
-				            		} else {
-				            			showError("phone","phoneErr",defaultArr[9]);
-				            		}
-				            	}
-	            			});
-	            		} else {
-	            			showError("regName","userMamErr",defaultArr[10]);
-	            		}	
-	            	}
-				});
-	            	
-		},
-		doSubmit:function() {
-			$.post("/user/register",$("#regForm_mod").serialize(), function(data){
-				if(data.status == 200){
-					jAlert('用户注册成功，请登录！',"提示", function(){
-						REGISTER.login();
-					});
-				} else {
-					jAlert("注册失败！","提示");
-				}
-			});
-		},
-		login:function() {
-			 location.href = "/page/login";
-			 return false;
-		},
-		reg:function() {
-			if (this.inputcheck()) {
-				this.beforeSubmit();
-			}
-		}
-	};
-</script>
-	</body>
+        <input type="button" name="validationButton" value="获取验证码" onclick="valdate1()" />
+
+        <input type="button" name="previous" class="previous action-button" value="上一步" />
+        <input type="button" name="next" class="next action-button" value="下一步" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">个人详情</h2>
+        <h3 class="fs-subtitle">第三步</h3>
+        <input type="text" name="name" placeholder="姓名" />
+
+        <input type="text" name="email" placeholder="邮箱" />
+
+
+        <input type="button" name="previous" class="previous action-button" value="上一步" />
+        <input type="submit" name="submit" class="action-button" value="提交" />
+    </fieldset>
+</form>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="js/jQuery.time.js" type="text/javascript"></script>
+<script src="js/jquery-validation/jquery.form.js" type="text/javascript"></script>
+<script src="js/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery-validation/localization/messages_zh.min.js"></script>
+<script src="js/sweetalert/sweetalert.min.js" type="text/javascript"></script>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+
+</body>
 </html>
+<script>
+    <%--$.validator.setDefaults({--%>
+        <%--errorPlacement:function(error,element) {--%>
+            <%--error.appendTo(element.parent().parent());--%>
+        <%--}--%>
+    <%--})--%>
+    $.validator.setDefaults({
+        errorPlacement:function(error,element) {
+            error.appendTo(element.parent().parent());
+        }
+    })
+
+
+        $("#msform").validate({
+            onkeyup:null,
+            rules:{
+                "phone":{
+                    "required":true,
+                },
+                "password":{
+                    "required":true
+
+                },
+                "repassword":{
+                    "required":true,
+                    "equalTo":"#password"
+                }
+            },
+            messages:{
+
+                "phone":{
+                    "required":"请输入手机号"
+                },
+                "password":{
+                    "required":"请输入密码"
+                },
+                "repassword":{
+                    "required":"请确认密码",
+                    "equalTo":"两次输入密码不同"
+                }
+            },
+            submitHandler:function(form){
+                $(form).ajaxSubmit({
+                    type:'post',
+                    url: 'doRegister',
+                    success: function(data){
+                        var redirectUrl = "${redirect}";
+
+                        if(data.success){
+
+                            swal({
+                                    title: '提示',
+                                    text: data.message,
+                                    confirmButtonText: "确定"
+                                },
+                                function(){
+                                    if (redirectUrl == "") {
+                                        location.href = "http://localhost:8089/tuto";
+                                    } else {
+                                        location.href = redirectUrl;
+                                    }
+                                });
+                        }else{
+
+                               swal(data.message);
+                        }
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+//    $.ajax({
+//        url:"",
+//        data:"",
+//        dataType:"",
+//        success:function(data){
+//
+//            if(data!=null){
+//                var str="";
+//            }
+//
+//        },
+//        error:function(){
+//            alert("服务器错误");
+//        }
+//    })
+
+
+
+    function valdate1(){
+        var phoneNum=$("#phone").val();
+        $.ajax({
+            url:"phone/Validation",
+            data:{"phone":phoneNum},
+            type:"post",
+            dataType:"json",
+            success:function(data){
+
+                if(data!=null){
+                    var str="<input type=\"hidden\" name=\"reCode\" value=\""+data+"\" />";
+                    $("#hiddenVal").html(str);
+                }else{
+                    alert("未知错误");
+                }
+
+
+            },
+            error:function(){
+                alert("服务器错误");
+            }
+        })
+    }
+</script>

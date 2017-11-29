@@ -1,5 +1,6 @@
 package com.tuto.service.impl;
 
+import com.tuto.common.dto.MessageResult;
 import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
@@ -14,13 +15,11 @@ import com.tuto.pojo.po.TtUserExample;
 import com.tuto.pojo.vo.TtUserCustom;
 import com.tuto.pojo.vo.TtUserQuery;
 import com.tuto.service.UserService;
-import org.apache.jute.Record;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +116,25 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return updateNum;
+    }
+
+    @Override
+    public int addUser(TtUser ttUser) {
+        int num =0;
+        try {
+
+            //密码加密
+            String pwd=ttUser.getPassword();
+            String md5Value = MD5Utils.getMd5Value(pwd);
+            ttUser.setPassword(md5Value);
+
+            num = ttUserDao.insert(ttUser);
+
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return num;
     }
 
     /**

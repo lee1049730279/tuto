@@ -31,9 +31,9 @@
         </style>
         <div class="header_top">
             <div class="header_inner clearfix">
-                <ul class="index_top_nav" id="user_login_info">
+                <ul class="index_top_nav" id="my_user_login_info">
                     <div class="login_menu clearfix">
-                        <li><a rel="nofollow" href="http://www.tuniu.com/u/login" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_登录___'])">登录</a>|<a rel="nofollow" href="http://www.tuniu.com/u/register" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_注册___'])">注册</a>
+                        <li><a rel="nofollow" href="http://localhost:8089/tuto" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_登录___'])">登录</a>|<a rel="nofollow" href="http://localhost:8089/tuto/register" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_注册___'])">注册</a>
                         </li>
                         <li><a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_注册有礼___'])"  rel="nofollow" href="http://www.tuniu.com/szt/newmembergift/?recId=1&q=a5" target="_blank"><img
                                 src="picture/registgift.gif" style="height: 22px; vertical-align: middle;" alt="会员注册有礼" /></a></li>

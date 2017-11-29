@@ -17,4 +17,9 @@ public class IndexAction {
         return "login";
     }
 
+    @RequestMapping("/register")
+    public String doRegister(){
+        return "register";
+    }
+
 }

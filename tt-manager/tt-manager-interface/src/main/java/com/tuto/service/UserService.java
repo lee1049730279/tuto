@@ -4,6 +4,7 @@ import com.tuto.common.dto.Order;
 import com.tuto.common.dto.Page;
 import com.tuto.common.dto.Result;
 import com.tuto.pojo.po.TtManager;
+import com.tuto.pojo.po.TtUser;
 import com.tuto.pojo.vo.TtUserCustom;
 import com.tuto.pojo.vo.TtUserQuery;
 
@@ -23,4 +24,6 @@ public interface UserService {
     int shieldingById(List<Long> ids);
 
     TtManager doLogin(String username, String password);
+
+    int addUser(TtUser ttUser);
 }

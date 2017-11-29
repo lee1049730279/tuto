@@ -10,6 +10,7 @@
 
     <!--1 扫描WEB层下注解类,可以扫描到base-package的当前包以及子包的所有注解类-->
     <context:component-scan base-package="com.tuto.sso.web"/>
+    <context:component-scan base-package="com.tuto.sso.message"/>
     <!--@RequestMapping @ResponseBody jackson转换成JSON-->
     <mvc:annotation-driven/>
 
@@ -38,5 +39,7 @@
     <!--静态资源解析-->
     <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/css/**" location="/css/"/>
-    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/img/**" location="/img/"/>
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
 </beans>
