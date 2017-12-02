@@ -10,7 +10,7 @@ html {
 	/*background: url('http://thecodeplayer.com/uploads/media/gs.png');*/
 	background: url('../img/bg-1.jpg') no-repeat !important;
 	/*background = gradient + image pattern combo*/
-	background: 
+	background:
 		linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)),
 		url('../img/bg-1.jpg');
 		/*url('http://thecodeplayer.com/uploads/media/gs.png');*/

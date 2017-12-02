@@ -22,4 +22,19 @@ public class IndexAction {
         return "register";
     }
 
+    @RequestMapping("/index")
+    public String doIndex1(){
+        return "index";
+    }
+
+    @RequestMapping("/user_detail")
+    public String doUser_detail(){
+        return "user_detail";
+    }
+
+
+    @RequestMapping("/user_upsatePassword")
+    public String doUser_detail2(){
+        return "user_upsatePassword";
+    }
 }
