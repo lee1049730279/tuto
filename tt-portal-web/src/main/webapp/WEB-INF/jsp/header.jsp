@@ -1,24 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta property="qh.webmaster" content="4ff57097b722d"/>
-    <meta property="wb:webmaster" content="cd996377eedb7f7f"/>
-    <title>途牛旅游网官网 - 跟团游,自助游,自驾游,出境游线路预订_机票预订查询_酒店预订</title>
-    <meta name="description" content="途牛旅游网提供跟团游、自助游、邮轮旅游、自驾游、定制游以及景点门票预订、机票预订、火车票预订服务,还有牛人专线、首付出发旅游等品质高端、价格实惠的旅游路线.全年有各种尾货特价、限时秒杀等特卖旅游路线让你畅游海内外,要旅游,找途牛."/>
-    <meta name="keywords" content="途牛 途牛旅游网 途牛旅游网官网 自助游 度假 出境游 周边旅游 途牛旅游" />
-    <link rel="canonical" href="http://www.tuniu.com/" /><meta name="mobile-agent" content="format=xhtml; url=http://m.tuniu.com"><meta name="mobile-agent" content="format=html5; url=http://m.tuniu.com">
-    <link rel="canonical" href="http://www.tuniu.com/" /><meta name="mobile-agent" content="format=xhtml; url=http://m.tuniu.com"><meta name="mobile-agent" content="format=html5; url=http://m.tuniu.com">
-    <link rel="stylesheet" href="css/powerfloat.css"/>
-    <link rel="stylesheet" href="css/autocomplete.mini.css"/>
-    <!--分类目录css-->
-    <link rel="stylesheet" href="css/hotelpagination.css"/>
-    <!--首页第一屏样式-->
-    <link rel="stylesheet" href="css/homepage_banner.css">
 
-</head>
    <%--<div class="page_top" style="width:100%; height:60px; /*background:url(images/cii_j1nl032ib6m6aagvbpenoiqaacsiakpiquaazwe42.jpeg) no-repeat top center;*/" >
        <div class="page_content" style="width:990px; margin:0 auto;"><a href="http://www.tuniu.com/szt/tuniu11years/" target="_blank" class="link1" style="display:block; width:100%; height:60px;"></a>
         </div>
@@ -30,10 +12,10 @@
             .index_top_nav .item_duobao .dropdown_panel {width: 100%; left: -1px; text-align: center;}
         </style>
         <div class="header_top">
-            <div class="header_inner clearfix">
+            <div class="header_inner clearfix"  >
                 <ul class="index_top_nav" id="my_user_login_info">
-                    <div class="login_menu clearfix">
-                        <li><a rel="nofollow" href="http://localhost:8089/tuto" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_登录___'])">登录</a>|<a rel="nofollow" href="http://localhost:8089/tuto/register" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_注册___'])">注册</a>
+                    <div class="login_menu clearfix" id="loginbar1" >
+                        <li><a  rel="nofollow" href="http://localhost:8089/tuto" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_登录___'])">登录</a>|<a rel="nofollow" href="http://localhost:8089/tuto/register" target="_blank" onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_注册___'])">注册</a>
                         </li>
                         <li><a onclick="_gaq.push(['_trackEvent','首页_hz','点击','顶部按钮_注册有礼___'])"  rel="nofollow" href="http://www.tuniu.com/szt/newmembergift/?recId=1&q=a5" target="_blank"><img
                                 src="picture/registgift.gif" style="height: 22px; vertical-align: middle;" alt="会员注册有礼" /></a></li>
@@ -101,10 +83,10 @@
                             <dt class="guide">看攻略</dt>
                             <dd>
                                 <ul>
-                                    <li><a href="http://go.tuniu.com/">攻略</a></li>
-                                    <li><a href="http://top.tuniu.com/">途牛风向标</a></li>
-                                    <li><a href="http://trips.tuniu.com/">游记</a></li>
-                                    <li><a href="http://www.tuniu.com/way/">达人玩法</a></li>
+                                    <li><a href="#">攻略</a></li>
+                                    <li><a href="#">途牛风向标</a></li>
+                                    <li><a href="#">游记</a></li>
+                                    <li><a href="#">达人玩法</a></li>
                                 </ul>
                             </dd>
 
@@ -228,4 +210,11 @@
             </div>
          </div>
      </div>
-</div>
+
+<script type="text/javascript" src="js/tuto.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+    </div>
+<script>
+
+</script>

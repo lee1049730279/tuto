@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta property="qh.webmaster" content="4ff57097b722d"/>
     <meta property="wb:webmaster" content="cd996377eedb7f7f"/>
-   <title>途牛旅游网官网 - 跟团游,自助游,自驾游,出境游线路预订_机票预订查询_酒店预订</title>
+   <title>途兔旅游网官网 - 跟团游,自助游,自驾游,出境游线路预订_机票预订查询_酒店预订</title>
 <meta name="description" content="途牛旅游网提供跟团游、自助游、邮轮旅游、自驾游、定制游以及景点门票预订、机票预订、火车票预订服务,还有牛人专线、首付出发旅游等品质高端、价格实惠的旅游路线.全年有各种尾货特价、限时秒杀等特卖旅游路线让你畅游海内外,要旅游,找途牛."/>
 <meta name="keywords" content="途牛 途牛旅游网 途牛旅游网官网 自助游 度假 出境游 周边旅游 途牛旅游" />
 <link rel="canonical" href="http://www.tuniu.com/" /><meta name="mobile-agent" content="format=xhtml; url=http://m.tuniu.com"><meta name="mobile-agent" content="format=html5; url=http://m.tuniu.com">
@@ -97,6 +97,7 @@
     </style>
 </head>
 <body class="index1200 " id="index1200">
+<script type="text/javascript" src="js/jquery.js"></script>
 <jsp:include page="header.jsp"></jsp:include>
 <!--end head-->
 
@@ -5593,6 +5594,7 @@
     var PageName = "度假:杭州:首页:hz";
     var GaPageName = "/度假/杭州/首页/www";
  </script>
+
 <script type="text/javascript" src="js/isshowchatentry.js"></script>
 <script src="js/require-2.1.15.min.js" data-main="//img4.tuniucdn.com/j/201710231130/index_amd/app"></script>
 <script src="js/stat_start.js"></script>
